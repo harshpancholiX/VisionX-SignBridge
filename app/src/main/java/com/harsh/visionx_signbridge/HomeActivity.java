@@ -21,7 +21,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import com.harsh.visionx_signbridge.Fragment.HomeFragment;
 import com.harsh.visionx_signbridge.Fragment.SignFragment;
-import com.harsh.visionx_signbridge.Fragment.favroiteFragment;
+import com.harsh.visionx_signbridge.Fragment.FavoriteFragment;
 import com.harsh.visionx_signbridge.Fragment.LanguagesFragment;
 
 
@@ -42,7 +42,7 @@ public class HomeActivity extends AppCompatActivity
     // Fragments
     HomeFragment homeFragment = new HomeFragment();
     SignFragment signFragment = new SignFragment();
-    favroiteFragment favoriteFragment = new favroiteFragment();
+    FavoriteFragment favoriteFragment = new FavoriteFragment();
     LanguagesFragment languagesFragment = new LanguagesFragment();
 
 
