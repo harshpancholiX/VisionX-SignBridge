@@ -121,7 +121,7 @@ public class Forgot_Password_Activity extends AppCompatActivity {
                 Toast.makeText(Forgot_Password_Activity.this, message, Toast.LENGTH_SHORT).show();
 
                 if (success) {
-                    Intent intent = new Intent(Forgot_Password_Activity.this, SplashActivity.class);
+                    Intent intent = new Intent(Forgot_Password_Activity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
                 }
