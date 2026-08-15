@@ -19,4 +19,10 @@
     <!-- Typography -->
     <color name="text_primary">#1A1C1E</color>
     <color name="text_secondary">#44474E</color>
+
+    <!-- Glass Morphism Colors -->
+    <color name="glass_bg_start">#15000000</color>
+    <color name="glass_bg_end">#05000000</color>
+    <color name="glass_stroke">#20000000</color>
+    <color name="nav_item_color">#44474E</color>
 </resources>

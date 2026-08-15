@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Glass Morphism Colors for Dark Theme -->
+    <color name="glass_bg_start">#25FFFFFF</color>
+    <color name="glass_bg_end">#08FFFFFF</color>
+    <color name="glass_stroke">#50FFFFFF</color>
+    <color name="nav_item_color">#FFFFFF</color>
+</resources>

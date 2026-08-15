@@ -3,16 +3,30 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.VisionXSignBridge"
         parent="Theme.Material3.DayNight.NoActionBar">
-
-        <!-- Customize your theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
     </style>
 
     <style name="ShowActionBar"
-        parent="Theme.Material3.DayNight" />
+        parent="Theme.Material3.DayNight">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="actionBarStyle">@style/CustomActionBar</item>
+    </style>
+
+    <style name="CustomActionBar" parent="Widget.AppCompat.ActionBar">
+        <item name="background">@drawable/top_bar_gradient</item>
+    </style>
 
     <style name="Theme.VisionXSignBridge"
         parent="Base.Theme.VisionXSignBridge" />
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <!-- Background of the splash screen -->
+        <item name="windowSplashScreenBackground">#050B2E</item>
+        <!-- Icon to be shown in the center -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/newapplogo</item>
+        <!-- Theme to switch to after the splash screen is done -->
+        <item name="postSplashScreenTheme">@style/Theme.VisionXSignBridge</item>
+    </style>
 
 </resources>
