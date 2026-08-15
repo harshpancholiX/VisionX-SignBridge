@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/splash_page_wallpaper">
+    android:background="@drawable/splashscreensign">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieSignBridge"
