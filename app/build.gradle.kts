@@ -42,6 +42,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.splashscreen)
     implementation(libs.volley)
+    implementation(libs.preference)
 
     implementation("com.airbnb.android:lottie:6.6.0")
     implementation("com.github.denzcoskun:ImageSlideshow:0.1.2")

@@ -1,5 +1,6 @@
 package com.harsh.visionx_signbridge.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -59,8 +60,10 @@ public class HomeFragment extends Fragment {
                 false
         );
 
-        preferences = android.preference.PreferenceManager
-                .getDefaultSharedPreferences(requireActivity());
+        preferences = requireActivity().getSharedPreferences(
+                "SignBridgePrefs",
+                Context.MODE_PRIVATE
+        );
 
         initializeViews(view);
 

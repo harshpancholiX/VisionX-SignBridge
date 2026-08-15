@@ -1,6 +1,5 @@
 package com.harsh.visionx_signbridge;
 
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,35 +12,32 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.Objects;
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.harsh.visionx_signbridge.Common.Urls;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import cz.msebera.android.httpclient.Header;
 
 public class RegistrationActivity extends AppCompatActivity {
 
     EditText etRegistrationName, etRegistrationMobNumber,
             etRegistrationEmailId, etRegistrationUsername,
             etRegistrationPassword, etRegistrationConformPassword;
+    ProgressDialog progressDialog;
     Button btnRegistrationRegister;
     CheckBox cbRegistrationShowHidePassword;
-    android.content.SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-
-        preferences = getSharedPreferences("SignBridgePrefs", MODE_PRIVATE);
-
-        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
 
         etRegistrationName = findViewById(R.id.etRegistrationName);
         etRegistrationMobNumber = findViewById(R.id.etRegistrationMobNumber);
@@ -128,27 +124,18 @@ public class RegistrationActivity extends AppCompatActivity {
                 etRegistrationConformPassword.setError("Enter Conform Password");
             }
 
-            else if (!Objects.equals(etRegistrationPassword.getText().toString(), etRegistrationConformPassword.getText().toString()))
+            else if (!etRegistrationPassword.getText().toString().equals(etRegistrationConformPassword.getText().toString()))
             {
                 etRegistrationConformPassword.setError("Password and Confirm Password must be same");
             }
 
             else {
-                android.content.SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("name", etRegistrationName.getText().toString());
-                editor.putString("mobileno", etRegistrationMobNumber.getText().toString());
-                editor.putString("emailid", etRegistrationEmailId.getText().toString());
-                editor.putString("username", etRegistrationUsername.getText().toString());
-                editor.putString("password", etRegistrationPassword.getText().toString());
-                editor.apply();
-
-                Toast.makeText(RegistrationActivity.this,
-                        "Registration Successfull",
-                        Toast.LENGTH_SHORT).show();
-
-                Intent i = new Intent(RegistrationActivity.this,LoginActivity.class);
-                startActivity(i);
-                finish();
+                progressDialog = new ProgressDialog(RegistrationActivity.this);
+                progressDialog.setTitle("Registration");
+                progressDialog.setMessage("Please wait");
+                progressDialog.setCanceledOnTouchOutside(true);
+                progressDialog.show();
+                registerUser();
             }
         });
 
@@ -183,5 +170,66 @@ public class RegistrationActivity extends AppCompatActivity {
         Toast.makeText(RegistrationActivity.this,
                 "Registration Page",
                 Toast.LENGTH_SHORT).show();
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
+
+    private void registerUser()
+    {
+        AsyncHttpClient client = new AsyncHttpClient();  //sending and managing request classes
+        RequestParams params = new RequestParams();  //collecting or put the data inside asynchttps client
+
+        params.put("name", etRegistrationName.getText().toString());
+        params.put("mobileno",etRegistrationMobNumber.getText().toString());
+        params.put("emailid", etRegistrationEmailId.getText().toString());
+        params.put("username", etRegistrationUsername.getText().toString());
+        params.put("password",etRegistrationPassword.getText().toString());
+        params.put("confirmpassword",etRegistrationConformPassword.getText().toString());
+
+        client.post(Urls.registerUserURL, params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                progressDialog.dismiss();
+                try {
+                    String status = response.getString("success");
+                    String message = response.getString("message");
+
+                    if (status.equals("1")) {
+                        Toast.makeText(RegistrationActivity.this,
+                                "Registration Successful",
+                                Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(RegistrationActivity.this, LoginActivity.class);
+                        startActivity(i);
+                        finish();
+                    } else {
+                        Toast.makeText(RegistrationActivity.this, message, Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                progressDialog.dismiss();
+                if (errorResponse != null) {
+                    try {
+                        String message = errorResponse.getString("message");
+                        Toast.makeText(RegistrationActivity.this, message, Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        System.out.println(e);
+                    }
+                }
+            }
+        });
+    }
+
+
 }

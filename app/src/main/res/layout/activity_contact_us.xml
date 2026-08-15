@@ -92,7 +92,7 @@
             android:paddingEnd="16sp"
             android:inputType="text"
             android:drawablePadding="10sp"
-            android:drawableStart="@drawable/email_icon"
+            android:drawableStart="@drawable/ic_email"
             android:layout_marginTop="36sp"/>
 
 

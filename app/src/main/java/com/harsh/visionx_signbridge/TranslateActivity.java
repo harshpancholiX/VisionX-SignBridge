@@ -26,6 +26,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import com.harsh.visionx_signbridge.Common.Urls;
 
 public class TranslateActivity extends AppCompatActivity {
 
@@ -38,7 +39,7 @@ public class TranslateActivity extends AppCompatActivity {
 
     Uri imageUri;
 
-    String API_URL = "http://YOUR_IP/visionxapi/translate.php";
+    String API_URL = Urls.CommonURL + "translate.php";
 
     ActivityResultLauncher<String> imagePicker =
             registerForActivityResult(

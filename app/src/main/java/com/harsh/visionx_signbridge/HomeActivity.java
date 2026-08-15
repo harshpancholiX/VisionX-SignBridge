@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
+import androidx.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -46,9 +46,6 @@ public class HomeActivity extends AppCompatActivity
     BridgeFragment bridgeFragment = new BridgeFragment();
     LanguagesFragment languagesFragment = new LanguagesFragment();
 
-    BridgeFragment bridgeFragment = new BridgeFragment();
-
-
     // Double Back
     boolean doubleTap = false;
 
@@ -67,8 +64,6 @@ public class HomeActivity extends AppCompatActivity
 
         homeBottomNavigationView =
                 findViewById(R.id.homeBottomNavigationView);
-        bridgeFragment =
-                findViewById(R.id.bridgeFragment);
 
 
         // Bottom Navigation Listener
@@ -290,6 +285,22 @@ public class HomeActivity extends AppCompatActivity
         }
 
 
+        // CONTACT US
+        else if (item.getItemId()
+                == R.id.MenuContactUs) {
+
+
+            Intent intent =
+                    new Intent(
+                            HomeActivity.this,
+                            ContactUsActivity.class
+                    );
+
+
+            startActivity(intent);
+        }
+
+
         // ABOUT
         else if (item.getItemId()
                 == R.id.MenuAboutUs) {
@@ -304,6 +315,19 @@ public class HomeActivity extends AppCompatActivity
 
             startActivity(intent);
         }
+         else if (item.getItemId()
+                 == R.id.MenuProfile) {
+
+
+             Intent intent =
+                     new Intent(
+                             HomeActivity.this,
+                             ProfileActivity.class
+                     );
+
+
+             startActivity(intent);
+         }
 
 
         // LOGOUT
