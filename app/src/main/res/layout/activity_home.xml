@@ -17,16 +17,23 @@
         android:id="@+id/homeFrameLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="95" />
+        android:layout_weight="98"
+        />
 
-    <!-- Bottom Navigation -->
+    <!-- Bottom Navigation Container -->
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/homeBottomNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="72dp"
+        android:background="#0B1430"
+        android:layout_weight="2"
+        android:elevation="12dp"
         app:menu="@menu/home_bottom_navigation"
-        app:itemIconTint="@color/black"
-        android:layout_weight="5"
-        />
+        app:itemIconTint="@color/signbridge_bottom_nav_colors"
+        app:itemTextColor="@color/signbridge_bottom_nav_colors"
+        app:itemRippleColor="#20247BFF"
+        app:itemActiveIndicatorStyle="@style/SignBridgeBottomNavIndicator"
+        app:labelVisibilityMode="labeled" />
 
 </LinearLayout>

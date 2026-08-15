@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import com.harsh.visionx_signbridge.Fragment.BridgeFragment;
 import com.harsh.visionx_signbridge.Fragment.HomeFragment;
 import com.harsh.visionx_signbridge.Fragment.SignFragment;
 import com.harsh.visionx_signbridge.Fragment.LanguagesFragment;
@@ -41,7 +42,7 @@ public class HomeActivity extends AppCompatActivity
     // Fragments
     HomeFragment homeFragment = new HomeFragment();
     SignFragment signFragment = new SignFragment();
-
+    BridgeFragment bridgeFragment = new BridgeFragment();
     LanguagesFragment languagesFragment = new LanguagesFragment();
 
 
@@ -193,7 +194,21 @@ public class HomeActivity extends AppCompatActivity
 
 
         // FAVORITES
+        else if (item.getItemId()
+                == R.id.bridge) {
 
+
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(
+                            R.id.homeFrameLayout,
+                            bridgeFragment
+                    )
+                    .commit();
+
+
+            return true;
+        }
 
 
 
