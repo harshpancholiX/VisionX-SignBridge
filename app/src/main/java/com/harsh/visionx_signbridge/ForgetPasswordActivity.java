@@ -2,6 +2,7 @@ package com.harsh.visionx_signbridge;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -22,6 +23,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     CheckBox cbForgetShowHidePassword;
     android.content.SharedPreferences preferences;
+    boolean doubleTap = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,4 +109,46 @@ public class ForgetPasswordActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public void onBackPressed() {
+
+
+        if (doubleTap) {
+
+            finishAffinity();
+
+        } else {
+
+
+            Toast.makeText(
+                    ForgetPasswordActivity.this,
+                    "Double Tap To Exit",
+                    Toast.LENGTH_SHORT
+            ).show();
+
+
+            doubleTap = true;
+
+
+            Handler handler =
+                    new Handler();
+
+
+            handler.postDelayed(
+                    new Runnable() {
+
+                        @Override
+                        public void run() {
+
+                            doubleTap = false;
+                        }
+
+                    },
+                    3000
+            );
+        }
+    }
+
 }
+

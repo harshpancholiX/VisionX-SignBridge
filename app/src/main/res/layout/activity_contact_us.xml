@@ -34,9 +34,10 @@
             android:hint="Enter Your Mobile No "
 
             android:background="@drawable/glass_card"
-            android:paddingLeft="16sp"
+            android:paddingStart="16sp"
+            android:paddingEnd="16sp"
             android:drawablePadding="10sp"
-            android:drawableLeft="@drawable/telephone_"
+            android:drawableStart="@drawable/telephone_"
             android:inputType="number"
             android:maxLength="10"
             android:layout_marginTop="46sp"/>
@@ -87,10 +88,11 @@
             android:textSize="16sp"
             android:hint="Enter Receipient / To"
             android:background="@drawable/glass_card"
-            android:paddingLeft="16sp"
+            android:paddingStart="16sp"
+            android:paddingEnd="16sp"
             android:inputType="text"
             android:drawablePadding="10sp"
-            android:drawableLeft="@drawable/Email_icon"
+            android:drawableStart="@drawable/email_icon"
             android:layout_marginTop="36sp"/>
 
 
@@ -102,7 +104,8 @@
             android:textSize="16sp"
             android:hint="Enter Subject "
             android:background="@drawable/glass_card"
-            android:paddingLeft="16sp"
+            android:paddingStart="16sp"
+            android:paddingEnd="16sp"
 
             android:inputType="text"
             android:layout_marginTop="16sp"
@@ -119,7 +122,8 @@
             android:textSize="16sp"
             android:layout_marginTop="16sp"
             android:inputType="text"
-            android:paddingLeft="16sp"
+            android:paddingStart="16sp"
+            android:paddingEnd="16sp"
             android:textColorHint="@color/white"
             android:id="@+id/etcontactemailenter"
             />
