@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-
 import com.harsh.visionx_signbridge.Fragment.HomeFragment;
 import com.harsh.visionx_signbridge.Fragment.SignFragment;
 import com.harsh.visionx_signbridge.Fragment.favroiteFragment;
@@ -28,106 +27,82 @@ import com.harsh.visionx_signbridge.Fragment.LanguagesFragment;
 public class HomeActivity extends AppCompatActivity
         implements NavigationBarView.OnItemSelectedListener {
 
-
-    // Shared Preferences
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
 
-
-    // Main Views
     FrameLayout homeFrameLayout;
     BottomNavigationView homeBottomNavigationView;
 
-
-    // Fragments
     HomeFragment homeFragment = new HomeFragment();
     SignFragment signFragment = new SignFragment();
     favroiteFragment favoriteFragment = new favroiteFragment();
     LanguagesFragment languagesFragment = new LanguagesFragment();
 
-
-    // Double Back
     boolean doubleTap = false;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_home2);
 
 
-        // Find Views
-        homeFrameLayout =
-                findViewById(R.id.homeFrameLayout);
+        // FIND VIEWS
+        homeFrameLayout = findViewById(R.id.homeFrameLayout);
 
         homeBottomNavigationView =
                 findViewById(R.id.homeBottomNavigationView);
 
 
-        // Bottom Navigation Listener
-        homeBottomNavigationView
-                .setOnItemSelectedListener(this);
+        // BOTTOM NAVIGATION LISTENER
+        homeBottomNavigationView.setOnItemSelectedListener(this);
 
 
-        // Default Fragment
-        homeBottomNavigationView
-                .setSelectedItemId(R.id.MenuBottomHome);
+        // DEFAULT HOME
+        homeBottomNavigationView.setSelectedItemId(
+                R.id.MenuBottomHome
+        );
 
 
-        // Shared Preferences
+        // SHARED PREFERENCES
         preferences =
-                PreferenceManager
-                        .getDefaultSharedPreferences(
-                                HomeActivity.this
-                        );
+                PreferenceManager.getDefaultSharedPreferences(
+                        HomeActivity.this
+                );
 
         editor = preferences.edit();
 
 
-        // First Time Welcome
+        // FIRST TIME CHECK
         boolean isFirstTime =
-                preferences.getBoolean(
-                        "isFirstTime",
-                        true
-                );
+                preferences.getBoolean("isFirstTime", true);
 
 
         if (isFirstTime) {
 
             welcome();
 
-            editor.putBoolean(
-                    "isFirstTime",
-                    false
-            );
-
+            editor.putBoolean("isFirstTime", false);
             editor.commit();
         }
     }
 
 
-
+    // =========================================================
+    // FIRST TIME WELCOME
+    // =========================================================
 
     private void welcome() {
 
         AlertDialog.Builder ad =
-                new AlertDialog.Builder(
-                        HomeActivity.this
-                );
+                new AlertDialog.Builder(HomeActivity.this);
 
-
-        ad.setTitle(
-                "Welcome to SignBridge"
-        );
-
+        ad.setTitle("Welcome to SignBridge");
 
         ad.setMessage(
-                "Breaking communication barriers, " +
-                        "one sign at a time."
+                "Breaking communication barriers, one sign at a time."
         );
-
 
         ad.setPositiveButton(
                 "Let's Start",
@@ -143,14 +118,13 @@ public class HomeActivity extends AppCompatActivity
                 }
         );
 
-
         ad.show();
     }
 
 
-    // ==========================================
+    // =========================================================
     // BOTTOM NAVIGATION
-    // ==========================================
+    // =========================================================
 
     @Override
     public boolean onNavigationItemSelected(
@@ -158,9 +132,7 @@ public class HomeActivity extends AppCompatActivity
 
 
         // HOME
-        if (item.getItemId()
-                == R.id.MenuBottomHome) {
-
+        if (item.getItemId() == R.id.MenuBottomHome) {
 
             getSupportFragmentManager()
                     .beginTransaction()
@@ -170,15 +142,12 @@ public class HomeActivity extends AppCompatActivity
                     )
                     .commit();
 
-
             return true;
         }
 
 
         // SIGNS
-        else if (item.getItemId()
-                == R.id.communication) {
-
+        else if (item.getItemId() == R.id.communication) {
 
             getSupportFragmentManager()
                     .beginTransaction()
@@ -188,7 +157,6 @@ public class HomeActivity extends AppCompatActivity
                     )
                     .commit();
 
-
             return true;
         }
 
@@ -196,7 +164,6 @@ public class HomeActivity extends AppCompatActivity
         // FAVORITES
         else if (item.getItemId()
                 == R.id.MenuBottomFavorites) {
-
 
             getSupportFragmentManager()
                     .beginTransaction()
@@ -206,15 +173,13 @@ public class HomeActivity extends AppCompatActivity
                     )
                     .commit();
 
-
             return true;
         }
 
 
-
+        // LANGUAGES
         else if (item.getItemId()
                 == R.id.MenuBottomLanguages) {
-
 
             getSupportFragmentManager()
                     .beginTransaction()
@@ -224,7 +189,6 @@ public class HomeActivity extends AppCompatActivity
                     )
                     .commit();
 
-
             return true;
         }
 
@@ -233,112 +197,105 @@ public class HomeActivity extends AppCompatActivity
     }
 
 
-    // ==========================================
+    // =========================================================
     // TOP MENU
-    // ==========================================
+    // =========================================================
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        MenuInflater inflater =
-                getMenuInflater();
-
+        MenuInflater inflater = getMenuInflater();
 
         inflater.inflate(
-                R.menu.home_bottom_navigation,
+                R.menu.menus,
                 menu
         );
-
 
         return true;
     }
 
 
-    // ==========================================
+    // =========================================================
     // TOP MENU ACTIONS
-    // ==========================================
+    // =========================================================
 
     @Override
     public boolean onOptionsItemSelected(
             @NonNull MenuItem item) {
 
 
-        // PROFILE
-
-
-
-
-
-
-        // SETTINGS
-         if (item.getItemId()
-                == R.id.MenuSetting) {
-
-
-            Intent intent =
-                    new Intent(
-                            HomeActivity.this,
-                           SettingActivity.class
-                    );
-
-
-            startActivity(intent);
-        }
-
-
-        // ABOUT
-        else if (item.getItemId()
-                == R.id.MenuAboutUs) {
-
-
-            Intent intent =
-                    new Intent(
-                            HomeActivity.this,
-                            About_Activity.class
-                    );
-
-
-            startActivity(intent);
-        }
-
-
         // LOGOUT
-        else if (item.getItemId()
-                == R.id.MenuLogout) {
-
+        if (item.getItemId() == R.id.MenuLogout) {
 
             logout();
+
+            return true;
         }
 
 
-        return true;
+        // SETTING
+        else if (item.getItemId() == R.id.MenuSetting) {
+
+            Intent intent =
+                    new Intent(
+                            HomeActivity.this,
+                            ProfileActivity.class
+                    );
+
+            startActivity(intent);
+
+            return true;
+        }
+
+
+        // CONTACT US
+        else if (item.getItemId() == R.id.MenuContactUs) {
+
+            Toast.makeText(
+                    HomeActivity.this,
+                    "Contact Us feature coming soon",
+                    Toast.LENGTH_SHORT
+            ).show();
+
+            return true;
+        }
+
+
+        // ABOUT US
+        else if (item.getItemId() == R.id.MenuAboutUs) {
+
+            Toast.makeText(
+                    HomeActivity.this,
+                    "SignBridge - Digital Sign Language Communication Platform",
+                    Toast.LENGTH_LONG
+            ).show();
+
+            return true;
+        }
+
+
+        return super.onOptionsItemSelected(item);
     }
 
 
-    // ==========================================
+    // =========================================================
     // LOGOUT
-    // ==========================================
+    // =========================================================
 
     private void logout() {
-
 
         AlertDialog.Builder ad =
                 new AlertDialog.Builder(
                         HomeActivity.this
                 );
 
-
-        ad.setTitle(
-                "Logout"
-        );
-
+        ad.setTitle("Logout");
 
         ad.setMessage(
                 "Are you sure you want to logout?"
         );
 
 
-        // CANCEL
         ad.setPositiveButton(
                 "Cancel",
                 new DialogInterface.OnClickListener() {
@@ -354,7 +311,6 @@ public class HomeActivity extends AppCompatActivity
         );
 
 
-        // LOGOUT
         ad.setNegativeButton(
                 "Logout",
                 new DialogInterface.OnClickListener() {
@@ -365,15 +321,16 @@ public class HomeActivity extends AppCompatActivity
                             int which) {
 
 
+                        // LOGIN STATUS FALSE
                         editor.putBoolean(
                                 "isLogin",
                                 false
                         );
 
-
                         editor.commit();
 
 
+                        // GO TO LOGIN
                         Intent intent =
                                 new Intent(
                                         HomeActivity.this,
@@ -399,20 +356,18 @@ public class HomeActivity extends AppCompatActivity
     }
 
 
-    // ==========================================
-    // DOUBLE TAP TO EXIT
-    // ==========================================
+    // =========================================================
+    // DOUBLE BACK PRESS TO EXIT
+    // =========================================================
 
     @Override
     public void onBackPressed() {
-
 
         if (doubleTap) {
 
             finishAffinity();
 
         } else {
-
 
             Toast.makeText(
                     HomeActivity.this,
@@ -424,11 +379,7 @@ public class HomeActivity extends AppCompatActivity
             doubleTap = true;
 
 
-            Handler handler =
-                    new Handler();
-
-
-            handler.postDelayed(
+            new Handler().postDelayed(
                     new Runnable() {
 
                         @Override
@@ -436,7 +387,6 @@ public class HomeActivity extends AppCompatActivity
 
                             doubleTap = false;
                         }
-
                     },
                     3000
             );
