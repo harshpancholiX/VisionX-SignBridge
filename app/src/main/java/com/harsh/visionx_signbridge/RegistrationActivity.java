@@ -13,6 +13,8 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Objects;
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -21,7 +23,6 @@ public class RegistrationActivity extends AppCompatActivity {
     EditText etRegistrationName, etRegistrationMobNumber,
             etRegistrationEmailId, etRegistrationUsername,
             etRegistrationPassword, etRegistrationConformPassword;
-    ProgressDialog progressDialog;
     Button btnRegistrationRegister;
     CheckBox cbRegistrationShowHidePassword;
     android.content.SharedPreferences preferences;
@@ -31,7 +32,16 @@ public class RegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        preferences = android.preference.PreferenceManager.getDefaultSharedPreferences(this);
+        preferences = getSharedPreferences("SignBridgePrefs", MODE_PRIVATE);
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         etRegistrationName = findViewById(R.id.etRegistrationName);
         etRegistrationMobNumber = findViewById(R.id.etRegistrationMobNumber);
@@ -43,148 +53,135 @@ public class RegistrationActivity extends AppCompatActivity {
         cbRegistrationShowHidePassword = findViewById(R.id.cbRegistrationShowHidePassword);
 
 
-        btnRegistrationRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btnRegistrationRegister.setOnClickListener(v -> {
 
-                if (etRegistrationName.getText().toString().isEmpty()) {
-                    etRegistrationName.setError("Enter Name");
-                }
+            if (etRegistrationName.getText().toString().isEmpty()) {
+                etRegistrationName.setError("Enter Name");
+            }
 
-                else if (etRegistrationMobNumber.getText().toString().isEmpty()) {
-                    etRegistrationMobNumber.setError("Enter Mobile Number");
-                }
+            else if (etRegistrationMobNumber.getText().toString().isEmpty()) {
+                etRegistrationMobNumber.setError("Enter Mobile Number");
+            }
 
-                else if (etRegistrationMobNumber.getText().toString().length() != 10) {
-                    etRegistrationMobNumber.setError("Mobile Number Length Must be 10");
-                }
+            else if (etRegistrationMobNumber.getText().toString().length() != 10) {
+                etRegistrationMobNumber.setError("Mobile Number Length Must be 10");
+            }
 
-                else if (etRegistrationEmailId.getText().toString().isEmpty()) {
-                    etRegistrationEmailId.setError("Enter Email Id");
-                }
+            else if (etRegistrationEmailId.getText().toString().isEmpty()) {
+                etRegistrationEmailId.setError("Enter Email Id");
+            }
 
-                else if (!etRegistrationEmailId.getText().toString().contains("@")
-                        || !etRegistrationEmailId.getText().toString().contains(".com")) {
-                    etRegistrationEmailId.setError("Enter Valid Email Id");
-                }
+            else if (!etRegistrationEmailId.getText().toString().contains("@")
+                    || !etRegistrationEmailId.getText().toString().contains(".com")) {
+                etRegistrationEmailId.setError("Enter Valid Email Id");
+            }
 
-                else if (etRegistrationUsername.getText().toString().isEmpty()) {
-                    etRegistrationUsername.setError("Enter Username");
-                }
+            else if (etRegistrationUsername.getText().toString().isEmpty()) {
+                etRegistrationUsername.setError("Enter Username");
+            }
 
-                else if (etRegistrationUsername.getText().toString().length() < 8) {
-                    etRegistrationUsername.setError("UserName Length Must be more than 8");
-                }
+            else if (etRegistrationUsername.getText().toString().length() < 8) {
+                etRegistrationUsername.setError("UserName Length Must be more than 8");
+            }
 
-                else if (!etRegistrationUsername.getText().toString().matches(".*[A-Z].*")) {
-                    etRegistrationUsername.setError("UserName Must contain 1 UpperCase");
-                }
+            else if (!etRegistrationUsername.getText().toString().matches(".*[A-Z].*")) {
+                etRegistrationUsername.setError("UserName Must contain 1 UpperCase");
+            }
 
-                else if (!etRegistrationUsername.getText().toString().matches(".*[a-z].*")) {
-                    etRegistrationUsername.setError("UserName Must contain 1 LowerCase");
-                }
+            else if (!etRegistrationUsername.getText().toString().matches(".*[a-z].*")) {
+                etRegistrationUsername.setError("UserName Must contain 1 LowerCase");
+            }
 
-                else if (!etRegistrationUsername.getText().toString().matches(".*[0-9].*")) {
-                    etRegistrationUsername.setError("UserName Must contain 1 Number");
-                }
+            else if (!etRegistrationUsername.getText().toString().matches(".*[0-9].*")) {
+                etRegistrationUsername.setError("UserName Must contain 1 Number");
+            }
 
-                else if (!etRegistrationUsername.getText().toString().matches(".*[@#$%^&+=!].*")) {
-                    etRegistrationUsername.setError("UserName Must contain 1 Special Symbol");
-                }
+            else if (!etRegistrationUsername.getText().toString().matches(".*[@#$%^&+=!].*")) {
+                etRegistrationUsername.setError("UserName Must contain 1 Special Symbol");
+            }
 
-                else if (etRegistrationPassword.getText().toString().isEmpty()) {
-                    etRegistrationPassword.setError("Enter Password");
-                }
+            else if (etRegistrationPassword.getText().toString().isEmpty()) {
+                etRegistrationPassword.setError("Enter Password");
+            }
 
-                else if (etRegistrationPassword.getText().toString().length() < 8) {
-                    etRegistrationPassword.setError("Password Length Must be more than 8");
-                }
+            else if (etRegistrationPassword.getText().toString().length() < 8) {
+                etRegistrationPassword.setError("Password Length Must be more than 8");
+            }
 
-                else if (!etRegistrationPassword.getText().toString().matches(".*[A-Z].*")) {
-                    etRegistrationPassword.setError("Password Must contain 1 UpperCase");
-                }
+            else if (!etRegistrationPassword.getText().toString().matches(".*[A-Z].*")) {
+                etRegistrationPassword.setError("Password Must contain 1 UpperCase");
+            }
 
-                else if (!etRegistrationPassword.getText().toString().matches(".*[a-z].*")) {
-                    etRegistrationPassword.setError("Password Must contain 1 LowerCase");
-                }
+            else if (!etRegistrationPassword.getText().toString().matches(".*[a-z].*")) {
+                etRegistrationPassword.setError("Password Must contain 1 LowerCase");
+            }
 
-                else if (!etRegistrationPassword.getText().toString().matches(".*[0-9].*")) {
-                    etRegistrationPassword.setError("Password Must contain 1 Number");
-                }
+            else if (!etRegistrationPassword.getText().toString().matches(".*[0-9].*")) {
+                etRegistrationPassword.setError("Password Must contain 1 Number");
+            }
 
-                else if (!etRegistrationPassword.getText().toString().matches(".*[@#$%^&+=!].*")) {
-                    etRegistrationPassword.setError("Password Must contain 1 Special Symbol");
-                }
+            else if (!etRegistrationPassword.getText().toString().matches(".*[@#$%^&+=!].*")) {
+                etRegistrationPassword.setError("Password Must contain 1 Special Symbol");
+            }
 
-                else if (etRegistrationConformPassword.getText().toString().isEmpty()) {
-                    etRegistrationConformPassword.setError("Enter Conform Password");
-                }
+            else if (etRegistrationConformPassword.getText().toString().isEmpty()) {
+                etRegistrationConformPassword.setError("Enter Conform Password");
+            }
 
-                else if (!etRegistrationPassword.getText().toString().equals(etRegistrationConformPassword.getText().toString()))
-                {
-                    etRegistrationConformPassword.setError("Password and Confirm Password must be same");
-                }
+            else if (!Objects.equals(etRegistrationPassword.getText().toString(), etRegistrationConformPassword.getText().toString()))
+            {
+                etRegistrationConformPassword.setError("Password and Confirm Password must be same");
+            }
 
-                else {
-                    android.content.SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("name", etRegistrationName.getText().toString());
-                    editor.putString("mobileno", etRegistrationMobNumber.getText().toString());
-                    editor.putString("emailid", etRegistrationEmailId.getText().toString());
-                    editor.putString("username", etRegistrationUsername.getText().toString());
-                    editor.putString("password", etRegistrationPassword.getText().toString());
-                    editor.apply();
+            else {
+                android.content.SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("name", etRegistrationName.getText().toString());
+                editor.putString("mobileno", etRegistrationMobNumber.getText().toString());
+                editor.putString("emailid", etRegistrationEmailId.getText().toString());
+                editor.putString("username", etRegistrationUsername.getText().toString());
+                editor.putString("password", etRegistrationPassword.getText().toString());
+                editor.apply();
 
-                    Toast.makeText(RegistrationActivity.this,
-                            "Registration Successfull",
-                            Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegistrationActivity.this,
+                        "Registration Successfull",
+                        Toast.LENGTH_SHORT).show();
 
-                    Intent i = new Intent(RegistrationActivity.this,LoginActivity.class);
-                    startActivity(i);
-                    finish();
-                }
+                Intent i = new Intent(RegistrationActivity.this,LoginActivity.class);
+                startActivity(i);
+                finish();
             }
         });
 
         cbRegistrationShowHidePassword.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                (buttonView, isChecked) -> {
 
-                        if (isChecked) {
-                            // Show Password
-                            etRegistrationPassword.setTransformationMethod(
-                                    HideReturnsTransformationMethod.getInstance());
+                    if (isChecked) {
+                        // Show Password
+                        etRegistrationPassword.setTransformationMethod(
+                                HideReturnsTransformationMethod.getInstance());
 
-                            etRegistrationConformPassword.setTransformationMethod(
-                                    HideReturnsTransformationMethod.getInstance());
-                        }
-                        else {
-                            // Hide Password
-                            etRegistrationPassword.setTransformationMethod(
-                                    PasswordTransformationMethod.getInstance());
-
-                            etRegistrationConformPassword.setTransformationMethod(
-                                    PasswordTransformationMethod.getInstance());
-                        }
-
-                        // Move cursor to the end
-                        etRegistrationPassword.setSelection(
-                                etRegistrationPassword.getText().length());
-
-                        etRegistrationConformPassword.setSelection(
-                                etRegistrationConformPassword.getText().length());
+                        etRegistrationConformPassword.setTransformationMethod(
+                                HideReturnsTransformationMethod.getInstance());
                     }
+                    else {
+                        // Hide Password
+                        etRegistrationPassword.setTransformationMethod(
+                                PasswordTransformationMethod.getInstance());
+
+                        etRegistrationConformPassword.setTransformationMethod(
+                                PasswordTransformationMethod.getInstance());
+                    }
+
+                    // Move cursor to the end
+                    etRegistrationPassword.setSelection(
+                            etRegistrationPassword.getText().length());
+
+                    etRegistrationConformPassword.setSelection(
+                            etRegistrationConformPassword.getText().length());
                 });
 
         Toast.makeText(RegistrationActivity.this,
                 "Registration Page",
                 Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
-        startActivity(intent);
-        finish();
     }
 }
