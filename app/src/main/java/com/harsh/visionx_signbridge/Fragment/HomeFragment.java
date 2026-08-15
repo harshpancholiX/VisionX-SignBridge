@@ -1,33 +1,57 @@
 package com.harsh.visionx_signbridge.Fragment;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.card.MaterialCardView;
-import com.harsh.visionx_signbridge.OfflinePackFragment;
 import com.harsh.visionx_signbridge.R;
+import com.harsh.visionx_signbridge.TranslateActivity;
+import com.harsh.visionx_signbridge.ProfileActivity;
 
 public class HomeFragment extends Fragment {
 
-    EditText etSearchSigns;
-    TextView ivtextanim,tvQuickAction;
+    TextView txtGreeting;
+    TextView txtUsername;
+    TextView txtProgress;
+    TextView txtSignsLearned;
+    TextView txtRecentOne;
+    TextView txtRecentTwo;
 
-    MaterialCardView cardEmergency;
-    MaterialCardView cardDailyPhrases;
-    MaterialCardView cardLearnSign;
-    MaterialCardView cardOfflinePack;
+    Button btnStartTranslate;
+
+    ImageView imgProfile;
+
+    LinearLayout cardTranslate;
+    LinearLayout cardSignToText;
+    LinearLayout cardTextToSign;
+    LinearLayout cardLearn;
+    LinearLayout cardPractice;
+
+    TextView navHome;
+    TextView navLearn;
+    TextView navTranslate;
+    TextView navProfile;
+
+    ProgressBar progressBar;
+
+    SharedPreferences preferences;
+
+    public HomeFragment() {
+    }
 
     @Nullable
     @Override
@@ -42,239 +66,323 @@ public class HomeFragment extends Fragment {
                 false
         );
 
+        preferences = requireActivity()
+                .getSharedPreferences(
+                        "SignBridgePrefs",
+                        Context.MODE_PRIVATE
+                );
 
+        initializeViews(view);
 
-        etSearchSigns = view.findViewById(
-                R.id.etSearchSigns
-        );
-        tvQuickAction = view.findViewById(
-                R.id.tvQuickAction
-        );
+        loadHomeData();
 
-
-
-
-
-        ivtextanim = view.findViewById(
-                R.id.ivtextanim
-        );
-
-        Animation animation = AnimationUtils.loadAnimation(
-                requireContext(),
-                R.anim.luxaryanim
-        );
-
-        ivtextanim.startAnimation(animation);
-
-
-
-        cardEmergency = view.findViewById(
-                R.id.cardEmergency
-        );
-
-        cardDailyPhrases = view.findViewById(
-                R.id.cardDailyPhrases
-        );
-
-        cardLearnSign = view.findViewById(
-                R.id.cardLearnSign
-        );
-
-        cardOfflinePack = view.findViewById(
-                R.id.cardOfflinePack
-        );
-
-
-        cardEmergency.setOnClickListener(
-                new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-
-                        SignFragment signFragment =
-                                new SignFragment();
-
-                        Bundle bundle =
-                                new Bundle();
-
-                        bundle.putString(
-                                "category",
-                                "Emergency"
-                        );
-
-                        signFragment.setArguments(
-                                bundle
-                        );
-
-                        requireActivity()
-                                .getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(
-                                        R.id.homeFrameLayout,
-                                        signFragment
-                                )
-                                .addToBackStack(null)
-                                .commit();
-                    }
-                }
-        );
-
-
-
-
-        cardDailyPhrases.setOnClickListener(
-                new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-
-                        SignFragment signFragment =
-                                new SignFragment();
-
-                        Bundle bundle =
-                                new Bundle();
-
-                        bundle.putString(
-                                "category",
-                                "Daily Phrases"
-                        );
-
-                        signFragment.setArguments(
-                                bundle
-                        );
-
-                        requireActivity()
-                                .getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(
-                                        R.id.homeFrameLayout,
-                                        signFragment
-                                )
-                                .addToBackStack(null)
-                                .commit();
-                    }
-                }
-        );
-
-
-
-
-        cardLearnSign.setOnClickListener(
-                new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-
-                        SignFragment
-                                learnSignFragment =
-                                new SignFragment();
-
-                        requireActivity()
-                                .getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(
-                                        R.id.homeFrameLayout,
-                                        learnSignFragment
-                                )
-                                .addToBackStack(null)
-                                .commit();
-                    }
-                }
-        );
-
-
-        // =========================
-        // OFFLINE PACK
-        // =========================
-
-        cardOfflinePack.setOnClickListener(
-                new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-
-                        OfflinePackFragment
-                                offlinePackFragment =
-                                new OfflinePackFragment();
-
-                        requireActivity()
-                                .getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(
-                                        R.id.homeFrameLayout,
-                                        offlinePackFragment
-                                )
-                                .addToBackStack(null)
-                                .commit();
-                    }
-                }
-        );
-
-
-        // =========================
-        // SEARCH SIGNS
-        // =========================
-
-        etSearchSigns.setOnEditorActionListener(
-                new TextView.OnEditorActionListener() {
-
-                    @Override
-                    public boolean onEditorAction(
-                            TextView v,
-                            int actionId,
-                            KeyEvent event) {
-
-                        if (actionId ==
-                                EditorInfo.IME_ACTION_SEARCH
-                                ||
-                                (event != null
-                                        && event.getKeyCode()
-                                        == KeyEvent.KEYCODE_ENTER)) {
-
-                            String search =
-                                    etSearchSigns
-                                            .getText()
-                                            .toString()
-                                            .trim();
-
-                            if (!search.isEmpty()) {
-
-                                SignFragment
-                                        signFragment =
-                                        new SignFragment();
-
-                                Bundle bundle =
-                                        new Bundle();
-
-                                bundle.putString(
-                                        "search",
-                                        search
-                                );
-
-                                signFragment.setArguments(
-                                        bundle
-                                );
-
-                                requireActivity()
-                                        .getSupportFragmentManager()
-                                        .beginTransaction()
-                                        .replace(
-                                                R.id.homeFrameLayout,
-                                                signFragment
-                                        )
-                                        .addToBackStack(null)
-                                        .commit();
-                            }
-
-                            return true;
-                        }
-
-                        return false;
-                    }
-                }
-        );
-
+        setupClickListeners();
 
         return view;
+    }
+
+    private void initializeViews(View view) {
+
+        txtGreeting =
+                view.findViewById(R.id.txtGreeting);
+
+        txtUsername =
+                view.findViewById(R.id.txtUsername);
+
+        txtProgress =
+                view.findViewById(R.id.txtProgress);
+
+        txtSignsLearned =
+                view.findViewById(R.id.txtSignsLearned);
+
+        txtRecentOne =
+                view.findViewById(R.id.txtRecentOne);
+
+        txtRecentTwo =
+                view.findViewById(R.id.txtRecentTwo);
+
+        btnStartTranslate =
+                view.findViewById(R.id.btnStartTranslate);
+
+        imgProfile =
+                view.findViewById(R.id.imgProfile);
+
+        cardTranslate =
+                view.findViewById(R.id.cardTranslate);
+
+        cardSignToText =
+                view.findViewById(R.id.cardSignToText);
+
+        cardTextToSign =
+                view.findViewById(R.id.cardTextToSign);
+
+        cardLearn =
+                view.findViewById(R.id.cardLearn);
+
+        cardPractice =
+                view.findViewById(R.id.cardPractice);
+
+
+        progressBar =
+                view.findViewById(R.id.progressBar);
+    }
+
+    private void loadHomeData() {
+
+        String username =
+                preferences.getString(
+                        "username",
+                        "User"
+                );
+
+        int progress =
+                preferences.getInt(
+                        "progress",
+                        68
+                );
+
+        int signsLearned =
+                preferences.getInt(
+                        "signsLearned",
+                        12
+                );
+
+        String recentOne =
+                preferences.getString(
+                        "recentOne",
+                        "Hello"
+                );
+
+        String recentTwo =
+                preferences.getString(
+                        "recentTwo",
+                        "Thank You"
+                );
+
+        txtUsername.setText(username);
+
+        progressBar.setProgress(progress);
+
+        txtProgress.setText(
+                progress + "%"
+        );
+
+        txtSignsLearned.setText(
+                signsLearned + " signs learned"
+        );
+
+        txtRecentOne.setText(
+                "🤟   " + recentOne
+        );
+
+        txtRecentTwo.setText(
+                "🤟   " + recentTwo
+        );
+    }
+
+    private void setupClickListeners() {
+
+        btnStartTranslate.setOnClickListener(v -> {
+
+            openTranslate(
+                    "sign_to_text"
+            );
+        });
+
+        cardTranslate.setOnClickListener(v -> {
+
+            openTranslate(
+                    "sign_to_text"
+            );
+        });
+
+        cardSignToText.setOnClickListener(v -> {
+
+            openTranslate(
+                    "sign_to_text"
+            );
+        });
+
+        cardTextToSign.setOnClickListener(v -> {
+
+            openTranslate(
+                    "text_to_sign"
+            );
+        });
+
+        cardLearn.setOnClickListener(v -> {
+
+        });
+
+        cardPractice.setOnClickListener(v -> {
+
+            Toast.makeText(
+                    requireContext(),
+                    "Practice mode coming soon",
+                    Toast.LENGTH_SHORT
+            ).show();
+        });
+
+        imgProfile.setOnClickListener(v -> {
+
+            openProfile();
+        });
+    }
+
+    private void openTranslate(String mode) {
+
+        Intent intent = new Intent(
+                requireActivity(),
+                TranslateActivity.class
+        );
+
+        intent.putExtra(
+                "mode",
+                mode
+        );
+
+        startActivity(intent);
+    }
+
+
+    private void openProfile() {
+
+        Intent intent = new Intent(
+                requireActivity(),
+                ProfileActivity.class
+        );
+
+        startActivity(intent);
+    }
+
+    public void saveUsername(String username) {
+
+        preferences.edit()
+                .putString(
+                        "username",
+                        username
+                )
+                .apply();
+
+        loadHomeData();
+    }
+
+    public void saveProgress(int progress) {
+
+        int validatedProgress = progress;
+        if (validatedProgress < 0) {
+            validatedProgress = 0;
+        }
+
+        if (validatedProgress > 100) {
+            validatedProgress = 100;
+        }
+
+        preferences.edit()
+                .putInt(
+                        "progress",
+                        validatedProgress
+                )
+                .apply();
+
+        loadHomeData();
+    }
+
+    public void saveSignsLearned(int count) {
+
+        preferences.edit()
+                .putInt(
+                        "signsLearned",
+                        count
+                )
+                .apply();
+
+        loadHomeData();
+    }
+
+    public void addLearnedSign() {
+
+        int currentSignsLearned =
+                preferences.getInt(
+                        "signsLearned",
+                        12
+                );
+
+        currentSignsLearned++;
+
+        int progress =
+                preferences.getInt(
+                        "progress",
+                        68
+                );
+
+        int newProgress = progress + 2;
+
+        if (newProgress > 100) {
+            newProgress = 100;
+        }
+
+        preferences.edit()
+                .putInt(
+                        "signsLearned",
+                        currentSignsLearned
+                )
+                .putInt(
+                        "progress",
+                        newProgress
+                )
+                .apply();
+
+        loadHomeData();
+    }
+
+    public void saveTranslation(
+            String translatedText) {
+
+        String recentOne =
+                preferences.getString(
+                        "recentOne",
+                        "Hello"
+                );
+
+        preferences.edit()
+                .putString(
+                        "recentTwo",
+                        recentOne
+                )
+                .putString(
+                        "recentOne",
+                        translatedText
+                )
+                .apply();
+
+        loadHomeData();
+    }
+
+    public String getUsername() {
+
+        return preferences.getString(
+                "username",
+                "User"
+        );
+    }
+
+    public void clearLocalData() {
+
+        preferences.edit()
+                .clear()
+                .apply();
+
+        loadHomeData();
+    }
+
+    @Override
+    public void onResume() {
+
+        super.onResume();
+
+        if (preferences != null) {
+            loadHomeData();
+        }
     }
 }
