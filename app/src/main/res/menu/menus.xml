@@ -10,7 +10,13 @@
         android:id="@+id/MenuLogout"
         android:title="logout"
         app:showAsAction="always"
-        android:icon="@drawable/exit"
+        android:icon="@drawable/logout_icon"
+        />
+    <item
+        android:id="@+id/MenuProfile"
+        android:title="Profile"
+        app:showAsAction="always"
+        android:icon="@drawable/account"
         />
 
     <item

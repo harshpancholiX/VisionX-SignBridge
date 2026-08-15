@@ -20,7 +20,6 @@ import androidx.fragment.app.Fragment;
 
 import com.harsh.visionx_signbridge.R;
 import com.harsh.visionx_signbridge.TranslateActivity;
-import com.harsh.visionx_signbridge.LearnActivity;
 import com.harsh.visionx_signbridge.ProfileActivity;
 
 public class HomeFragment extends Fragment {
@@ -123,17 +122,6 @@ public class HomeFragment extends Fragment {
         cardPractice =
                 view.findViewById(R.id.cardPractice);
 
-        navHome =
-                view.findViewById(R.id.navHome);
-
-        navLearn =
-                view.findViewById(R.id.navLearn);
-
-        navTranslate =
-                view.findViewById(R.id.navTranslate);
-
-        navProfile =
-                view.findViewById(R.id.navProfile);
 
         progressBar =
                 view.findViewById(R.id.progressBar);
@@ -224,7 +212,6 @@ public class HomeFragment extends Fragment {
 
         cardLearn.setOnClickListener(v -> {
 
-            openLearn();
         });
 
         cardPractice.setOnClickListener(v -> {
@@ -237,32 +224,6 @@ public class HomeFragment extends Fragment {
         });
 
         imgProfile.setOnClickListener(v -> {
-
-            openProfile();
-        });
-
-        navHome.setOnClickListener(v -> {
-
-            Toast.makeText(
-                    requireContext(),
-                    "You are already on Home",
-                    Toast.LENGTH_SHORT
-            ).show();
-        });
-
-        navLearn.setOnClickListener(v -> {
-
-            openLearn();
-        });
-
-        navTranslate.setOnClickListener(v -> {
-
-            openTranslate(
-                    "sign_to_text"
-            );
-        });
-
-        navProfile.setOnClickListener(v -> {
 
             openProfile();
         });
@@ -283,15 +244,6 @@ public class HomeFragment extends Fragment {
         startActivity(intent);
     }
 
-    private void openLearn() {
-
-        Intent intent = new Intent(
-                requireActivity(),
-                LearnActivity.class
-        );
-
-        startActivity(intent);
-    }
 
     private void openProfile() {
 

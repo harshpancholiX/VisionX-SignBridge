@@ -55,7 +55,7 @@ public class HomeActivity extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_home2);
 
 
         // Find Views
