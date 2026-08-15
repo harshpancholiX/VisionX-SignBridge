@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 
             Intent intent = new Intent(
                     LoginActivity.this,
-                    Forgot_Password_Activity.class
+                    ForgetPasswordActivity.class
             );
 
             startActivity(intent);
