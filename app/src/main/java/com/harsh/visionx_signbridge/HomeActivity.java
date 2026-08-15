@@ -1,6 +1,5 @@
 package com.harsh.visionx_signbridge;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -19,427 +18,140 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import com.harsh.visionx_signbridge.Fragment.BridgeFragment;
 import com.harsh.visionx_signbridge.Fragment.HomeFragment;
 import com.harsh.visionx_signbridge.Fragment.SignFragment;
 import com.harsh.visionx_signbridge.Fragment.favroiteFragment;
 import com.harsh.visionx_signbridge.Fragment.LanguagesFragment;
 
+public class HomeActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
 
-public class HomeActivity extends AppCompatActivity
-        implements NavigationBarView.OnItemSelectedListener {
-
-
-    // Shared Preferences
+    boolean doubleTap = false;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
 
-
-    // Main Views
     FrameLayout homeFrameLayout;
-    BottomNavigationView homeBottomNavigationView;
+    BottomNavigationView bottomNavigationView;
 
-
-    // Fragments
     HomeFragment homeFragment = new HomeFragment();
     SignFragment signFragment = new SignFragment();
+
+    BridgeFragment bridgeFragment = new BridgeFragment();
     favroiteFragment favoriteFragment = new favroiteFragment();
     LanguagesFragment languagesFragment = new LanguagesFragment();
 
-
-    // Double Back
-    boolean doubleTap = false;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
 
-        setContentView(R.layout.activity_home2);
-
-
-        // Find Views
-        homeFrameLayout =
-                findViewById(R.id.homeFrameLayout);
-
-        homeBottomNavigationView =
-                findViewById(R.id.homeBottomNavigationView);
-
-
-        // Bottom Navigation Listener
-        homeBottomNavigationView
-                .setOnItemSelectedListener(this);
-
-
-        // Default Fragment
-        homeBottomNavigationView
-                .setSelectedItemId(R.id.MenuBottomHome);
-
-
-        // Shared Preferences
-        preferences =
-                PreferenceManager
-                        .getDefaultSharedPreferences(
-                                HomeActivity.this
-                        );
-
+        preferences = PreferenceManager.getDefaultSharedPreferences(HomeActivity.this);
         editor = preferences.edit();
 
-
-        // First Time Welcome
-        boolean isFirstTime =
-                preferences.getBoolean(
-                        "isFirstTime",
-                        true
-                );
-
-
+        boolean isFirstTime = preferences.getBoolean("isFirstTime", true);
         if (isFirstTime) {
-
             welcome();
-
-            editor.putBoolean(
-                    "isFirstTime",
-                    false
-            );
-
-            editor.commit();
         }
+
+        homeFrameLayout = findViewById(R.id.homeFrameLayout);
+        bottomNavigationView = findViewById(R.id.homeBottomNavigationView);
+        
+        bottomNavigationView.setOnItemSelectedListener(this);
+        bottomNavigationView.setSelectedItemId(R.id.MenuBottomHome);
     }
-
-
-
 
     private void welcome() {
-
-        AlertDialog.Builder ad =
-                new AlertDialog.Builder(
-                        HomeActivity.this
-                );
-
-
-        ad.setTitle(
-                "Welcome to SignBridge"
-        );
-
-
-        ad.setMessage(
-                "Breaking communication barriers, " +
-                        "one sign at a time."
-        );
-
-
-        ad.setPositiveButton(
-                "Let's Start",
-                new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(
-                            DialogInterface dialog,
-                            int which) {
-
-                        dialog.dismiss();
-                    }
-                }
-        );
-
-
+        AlertDialog.Builder ad = new AlertDialog.Builder(HomeActivity.this);
+        ad.setTitle("Sign Bridge");
+        ad.setMessage("Welcome to Sign Bridge App");
+        ad.setPositiveButton("Let's Start", (dialog, which) -> dialog.dismiss());
         ad.show();
+        editor.putBoolean("isFirstTime", false).commit();
     }
-
-
-    // ==========================================
-    // BOTTOM NAVIGATION
-    // ==========================================
-
-    @Override
-    public boolean onNavigationItemSelected(
-            @NonNull MenuItem item) {
-
-
-        // HOME
-        if (item.getItemId()
-                == R.id.MenuBottomHome) {
-
-
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(
-                            R.id.homeFrameLayout,
-                            homeFragment
-                    )
-                    .commit();
-
-
-            return true;
-        }
-
-
-        // SIGNS
-        else if (item.getItemId()
-                == R.id.communication) {
-
-
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(
-                            R.id.homeFrameLayout,
-                            signFragment
-                    )
-                    .commit();
-
-
-            return true;
-        }
-
-
-        // FAVORITES
-        else if (item.getItemId()
-                == R.id.MenuBottomFavorites) {
-
-
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(
-                            R.id.homeFrameLayout,
-                            favoriteFragment
-                    )
-                    .commit();
-
-
-            return true;
-        }
-
-
-
-        else if (item.getItemId()
-                == R.id.MenuBottomLanguages) {
-
-
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(
-                            R.id.homeFrameLayout,
-                            languagesFragment
-                    )
-                    .commit();
-
-
-            return true;
-        }
-
-
-        return false;
-    }
-
-
-    // ==========================================
-    // TOP MENU
-    // ==========================================
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater inflater =
-                getMenuInflater();
-
-
-        inflater.inflate(
-                R.menu.home_bottom_navigation,
-                menu
-        );
-
-
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menus, menu);
         return true;
     }
-
-
-    // ==========================================
-    // TOP MENU ACTIONS
-    // ==========================================
 
     @Override
-    public boolean onOptionsItemSelected(
-            @NonNull MenuItem item) {
-
-
-        // PROFILE
-
-
-
-
-
-
-        // SETTINGS
-         if (item.getItemId()
-                == R.id.MenuSetting) {
-
-
-            Intent intent =
-                    new Intent(
-                            HomeActivity.this,
-                           SettingActivity.class
-                    );
-
-
-            startActivity(intent);
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.MenuSetting) {
+            Intent i = new Intent(HomeActivity.this, SettingActivity.class);
+            startActivity(i);
+        } else if (item.getItemId() == R.id.MenuAboutUs) {
+            Intent i = new Intent(HomeActivity.this, AboutUsActivity.class);
+            startActivity(i);
         }
-
-
-        // ABOUT
-        else if (item.getItemId()
-                == R.id.MenuAboutUs) {
-
-
-            Intent intent =
-                    new Intent(
-                            HomeActivity.this,
-                            About_Activity.class
-                    );
-
-
-            startActivity(intent);
+        else if (item.getItemId()==R.id.MenuProfile)
+        {
+            Intent i = new Intent(HomeActivity.this,ProfileActivity.class);
+            startActivity(i);
         }
-
-
-        // LOGOUT
-        else if (item.getItemId()
-                == R.id.MenuLogout) {
-
-
+        else if (item.getItemId()==R.id.MenuContactUs)
+        {
+         Intent i = new Intent(HomeActivity.this,ContactUsActivity.class);
+         startActivity(i);
+        }
+        else if (item.getItemId() == R.id.MenuLogout) {
             logout();
         }
-
-
         return true;
     }
 
-
-    // ==========================================
-    // LOGOUT
-    // ==========================================
-
     private void logout() {
-
-
-        AlertDialog.Builder ad =
-                new AlertDialog.Builder(
-                        HomeActivity.this
-                );
-
-
-        ad.setTitle(
-                "Logout"
-        );
-
-
-        ad.setMessage(
-                "Are you sure you want to logout?"
-        );
-
-
-        // CANCEL
-        ad.setPositiveButton(
-                "Cancel",
-                new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(
-                            DialogInterface dialog,
-                            int which) {
-
-                        dialog.dismiss();
-                    }
-                }
-        );
-
-
-        // LOGOUT
-        ad.setNegativeButton(
-                "Logout",
-                new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(
-                            DialogInterface dialog,
-                            int which) {
-
-
-                        editor.putBoolean(
-                                "isLogin",
-                                false
-                        );
-
-
-                        editor.commit();
-
-
-                        Intent intent =
-                                new Intent(
-                                        HomeActivity.this,
-                                        LoginActivity.class
-                                );
-
-
-                        intent.setFlags(
-                                Intent.FLAG_ACTIVITY_NEW_TASK |
-                                        Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        );
-
-
-                        startActivity(intent);
-
-                        finishAffinity();
-                    }
-                }
-        );
-
-
-        ad.show();
+        AlertDialog.Builder ad = new AlertDialog.Builder(HomeActivity.this);
+        ad.setTitle("Logout");
+        ad.setMessage("Are you sure you want to Logout?");
+        ad.setPositiveButton("Cancel", (dialog, which) -> dialog.cancel());
+        ad.setNegativeButton("Logout", (dialog, which) -> {
+            LoginActivity.logout(HomeActivity.this);
+        }).show();
     }
 
-
-    // ==========================================
-    // DOUBLE TAP TO EXIT
-    // ==========================================
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.MenuBottomHome) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.homeFrameLayout, homeFragment)
+                    .commit();
+            return true;
+        } else if (item.getItemId() == R.id.communication) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.homeFrameLayout, signFragment)
+                    .commit();
+            return true;
+        }
+        else if (item.getItemId() == R.id.bridge) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.homeFrameLayout, bridgeFragment)
+                    .commit();
+            return true;
+        }
+        else if (item.getItemId() == R.id.MenuBottomFavorites) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.homeFrameLayout, favoriteFragment)
+                    .commit();
+            return true;
+        } else if (item.getItemId() == R.id.MenuBottomLanguages) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.homeFrameLayout, languagesFragment)
+                    .commit();
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public void onBackPressed() {
-
-
         if (doubleTap) {
-
             finishAffinity();
-
         } else {
-
-
-            Toast.makeText(
-                    HomeActivity.this,
-                    "Double Tap To Exit",
-                    Toast.LENGTH_SHORT
-            ).show();
-
-
+            Toast.makeText(HomeActivity.this, "Double tap to exit app", Toast.LENGTH_SHORT).show();
             doubleTap = true;
-
-
-            Handler handler =
-                    new Handler();
-
-
-            handler.postDelayed(
-                    new Runnable() {
-
-                        @Override
-                        public void run() {
-
-                            doubleTap = false;
-                        }
-
-                    },
-                    3000
-            );
+            new Handler().postDelayed(() -> doubleTap = false, 2000);
         }
     }
 }

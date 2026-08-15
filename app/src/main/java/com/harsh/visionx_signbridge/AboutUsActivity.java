@@ -1,12 +1,16 @@
 package com.harsh.visionx_signbridge;
 
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-public class LearnActivity extends AppCompatActivity {
+public class AboutUsActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_learn);
+
+        setContentView(R.layout.activity_aboutus);
+
     }
 }
