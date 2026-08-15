@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
 
             Intent intent = new Intent(
                     LoginActivity.this,
-                    RegisterActivity.class
+                    RegistrationActivity.class
             );
 
             startActivity(intent);
