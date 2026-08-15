@@ -24,11 +24,14 @@ public class RegistrationActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     Button btnRegistrationRegister;
     CheckBox cbRegistrationShowHidePassword;
+    android.content.SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+        preferences = android.preference.PreferenceManager.getDefaultSharedPreferences(this);
 
         etRegistrationName = findViewById(R.id.etRegistrationName);
         etRegistrationMobNumber = findViewById(R.id.etRegistrationMobNumber);
@@ -123,6 +126,14 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
 
                 else {
+                    android.content.SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("name", etRegistrationName.getText().toString());
+                    editor.putString("mobileno", etRegistrationMobNumber.getText().toString());
+                    editor.putString("emailid", etRegistrationEmailId.getText().toString());
+                    editor.putString("username", etRegistrationUsername.getText().toString());
+                    editor.putString("password", etRegistrationPassword.getText().toString());
+                    editor.apply();
+
                     Toast.makeText(RegistrationActivity.this,
                             "Registration Successfull",
                             Toast.LENGTH_SHORT).show();

@@ -66,11 +66,8 @@ public class HomeFragment extends Fragment {
                 false
         );
 
-        preferences = requireActivity()
-                .getSharedPreferences(
-                        "SignBridgePrefs",
-                        Context.MODE_PRIVATE
-                );
+        preferences = android.preference.PreferenceManager
+                .getDefaultSharedPreferences(requireActivity());
 
         initializeViews(view);
 

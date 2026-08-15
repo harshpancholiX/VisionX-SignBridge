@@ -21,12 +21,15 @@ public class ForgetPasswordActivity extends AppCompatActivity {
     Button btnForgetPassword;
     ProgressDialog progressDialog;
     CheckBox cbForgetShowHidePassword;
+    android.content.SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_forgot_password);
+
+        preferences = android.preference.PreferenceManager.getDefaultSharedPreferences(this);
 
         etusername = findViewById(R.id.etForgetPasswordUsername);
         etNewPassword = findViewById(R.id.etForgetPasswordNewPassword);
@@ -53,10 +56,21 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                 } else if (!etNewPassword.getText().toString().equals(etConfirmNewPassword.getText().toString())) {
                     etConfirmNewPassword.setError("Password and ConfirmPassword Does Not Match");
                 } else {
-                    Toast.makeText(ForgetPasswordActivity.this, "Password Reset Successfully", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(ForgetPasswordActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                    finish();
+                    String username = etusername.getText().toString();
+                    String savedUsername = preferences.getString("username", "");
+
+                    if (!username.equals(savedUsername)) {
+                        etusername.setError("Username not found");
+                    } else {
+                        android.content.SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("password", etNewPassword.getText().toString());
+                        editor.apply();
+
+                        Toast.makeText(ForgetPasswordActivity.this, "Password Reset Successfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(ForgetPasswordActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
 
             }
