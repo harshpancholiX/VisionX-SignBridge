@@ -366,7 +366,7 @@ public class HomeActivity extends AppCompatActivity
 
 
                         editor.putBoolean(
-                                "isLogin",
+                                "isLoggedIn",
                                 false
                         );
 

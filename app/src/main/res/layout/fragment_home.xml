@@ -17,41 +17,114 @@
 
 
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:paddingTop="8dp"
             android:paddingBottom="18dp">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="WELCOME TO"
-                android:textColor="#6DB8FF"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:letterSpacing="0.16"/>
+                android:orientation="vertical"
+                android:layout_alignParentStart="true">
 
-            <TextView
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/txtGreeting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="WELCOME TO"
+                    android:textColor="#6DB8FF"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.16"/>
+
+                <TextView
+                    android:id="@+id/txtUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="SignBridge"
+                    android:textColor="#FFFFFF"
+                    android:textSize="32sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                app:cardCornerRadius="24dp"
+                app:cardBackgroundColor="#20FFFFFF"
+                app:strokeWidth="1dp"
+                app:strokeColor="#4055B8FF">
+
+                <ImageView
+                    android:id="@+id/imgProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    android:src="@android:drawable/ic_menu_myplaces"
+                    app:tint="#55B8FF"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </RelativeLayout>
+
+        <!-- Progress Section -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="18dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="18dp"
+            app:strokeColor="#3055B8FF"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:text="SignBridge"
-                android:id="@+id/ivtextanim"
-                android:textColor="#FFFFFF"
-                android:textSize="32sp"
-                android:textStyle="bold"/>
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:background="@drawable/glass_card">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Breaking communication barriers, one sign at a time."
-                android:textColor="#AAB8DE"
-                android:textSize="14sp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/txtSignsLearned"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="0 signs learned"
+                        android:textColor="#AAB8DE"
+                        android:textSize="13sp"/>
+                    <TextView
+                        android:id="@+id/txtProgress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0%"
+                        android:textColor="#55B8FF"
+                        android:textSize="14sp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
 
-        </LinearLayout>
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:layout_marginTop="10dp"
+                    android:progress="68"
+                    android:progressDrawable="@android:drawable/progress_horizontal"
+                    android:progressTint="#55B8FF"/>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
 
 
 
@@ -86,7 +159,7 @@
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:hint="Search signs, phrases or categories..."
-                    android:hintTextColor="#7180A8"
+                    android:textColorHint="#7180A8"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp"
                     android:singleLine="true"
@@ -100,6 +173,7 @@
 
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardTranslate"
             android:layout_width="match_parent"
             android:layout_height="215dp"
             android:layout_marginTop="18dp"
@@ -143,7 +217,7 @@
                     android:maxLines="2"/>
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnStartLearning"
+                    android:id="@+id/btnStartTranslate"
                     android:layout_width="wrap_content"
                     android:layout_height="46dp"
                     android:layout_marginTop="14dp"
@@ -190,7 +264,7 @@
 
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardEmergency"
+                android:id="@+id/cardPractice"
                 android:layout_width="0dp"
                 android:layout_height="145dp"
                 android:layout_weight="1"
@@ -240,7 +314,7 @@
 
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardDailyPhrases"
+                android:id="@+id/cardSignToText"
                 android:layout_width="0dp"
                 android:layout_height="145dp"
                 android:layout_weight="1"
@@ -299,7 +373,7 @@
 
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardLearnSign"
+                android:id="@+id/cardLearn"
                 android:layout_width="0dp"
                 android:layout_height="145dp"
                 android:layout_weight="1"
@@ -398,7 +472,7 @@
         </LinearLayout>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardTextToSpeech"
+            android:id="@+id/cardTextToSign"
             android:layout_width="match_parent"
             android:layout_height="125dp"
             android:layout_marginTop="14dp"
@@ -461,6 +535,43 @@
         </com.google.android.material.card.MaterialCardView>
 
 
+
+        <!-- Recent Translations -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Recent Activity"
+            android:textColor="#FFFFFF"
+            android:textSize="21sp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtRecentOne"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:text="🤟   Hello"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/glass_card"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/txtRecentTwo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:text="🤟   Thank You"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/glass_card"/>
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"

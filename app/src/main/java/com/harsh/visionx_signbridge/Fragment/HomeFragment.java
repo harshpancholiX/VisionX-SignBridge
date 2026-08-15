@@ -1,6 +1,5 @@
 package com.harsh.visionx_signbridge.Fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import com.google.android.material.card.MaterialCardView;
 
 import com.harsh.visionx_signbridge.R;
 import com.harsh.visionx_signbridge.TranslateActivity;
@@ -35,16 +35,11 @@ public class HomeFragment extends Fragment {
 
     ImageView imgProfile;
 
-    LinearLayout cardTranslate;
-    LinearLayout cardSignToText;
-    LinearLayout cardTextToSign;
-    LinearLayout cardLearn;
-    LinearLayout cardPractice;
-
-    TextView navHome;
-    TextView navLearn;
-    TextView navTranslate;
-    TextView navProfile;
+    MaterialCardView cardTranslate;
+    MaterialCardView cardSignToText;
+    MaterialCardView cardTextToSign;
+    MaterialCardView cardLearn;
+    MaterialCardView cardPractice;
 
     ProgressBar progressBar;
 
