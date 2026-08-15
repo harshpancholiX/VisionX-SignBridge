@@ -42,12 +42,13 @@ dependencies {
     implementation(libs.material)
     implementation(libs.splashscreen)
     implementation(libs.volley)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.espresso.core)
-    androidTestImplementation(libs.ext.junit)
+
     implementation("com.airbnb.android:lottie:6.6.0")
     implementation("com.github.denzcoskun:ImageSlideshow:0.1.2")
     implementation("com.loopj.android:android-async-http:1.4.11")
     implementation("com.github.bumptech.glide:glide:4.16.0")
-    implementation("com.android.volley:volley:1.2.1")
+    implementation("com.google.mlkit:text-recognition:16.0.1")
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.ext.junit)
 }

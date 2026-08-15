@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import com.harsh.visionx_signbridge.Fragment.BridgeFragment;
 import com.harsh.visionx_signbridge.Fragment.HomeFragment;
 import com.harsh.visionx_signbridge.Fragment.SignFragment;
 import com.harsh.visionx_signbridge.Fragment.LanguagesFragment;
@@ -44,6 +46,8 @@ public class HomeActivity extends AppCompatActivity
 
     LanguagesFragment languagesFragment = new LanguagesFragment();
 
+    BridgeFragment bridgeFragment = new BridgeFragment();
+
 
     // Double Back
     boolean doubleTap = false;
@@ -63,12 +67,26 @@ public class HomeActivity extends AppCompatActivity
 
         homeBottomNavigationView =
                 findViewById(R.id.homeBottomNavigationView);
+        bridgeFragment =
+                findViewById(R.id.bridgeFragment);
 
 
         // Bottom Navigation Listener
         homeBottomNavigationView
                 .setOnItemSelectedListener(this);
 
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (doubleTap) {
+                    finishAffinity();
+                } else {
+                    Toast.makeText(HomeActivity.this, "Double Tap To Exit", Toast.LENGTH_SHORT).show();
+                    doubleTap = true;
+                    new Handler().postDelayed(() -> doubleTap = false, 3000);
+                }
+            }
+        });
 
         // Default Fragment
         homeBottomNavigationView
@@ -76,11 +94,7 @@ public class HomeActivity extends AppCompatActivity
 
 
         // Shared Preferences
-        preferences =
-                PreferenceManager
-                        .getDefaultSharedPreferences(
-                                HomeActivity.this
-                        );
+        preferences = getSharedPreferences("SignBridgePrefs", MODE_PRIVATE);
 
         editor = preferences.edit();
 
@@ -130,16 +144,7 @@ public class HomeActivity extends AppCompatActivity
 
         ad.setPositiveButton(
                 "Let's Start",
-                new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(
-                            DialogInterface dialog,
-                            int which) {
-
-                        dialog.dismiss();
-                    }
-                }
+                (dialog, which) -> dialog.dismiss()
         );
 
 
@@ -326,56 +331,41 @@ public class HomeActivity extends AppCompatActivity
         // CANCEL
         ad.setPositiveButton(
                 "Cancel",
-                new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(
-                            DialogInterface dialog,
-                            int which) {
-
-                        dialog.dismiss();
-                    }
-                }
+                (dialog, which) -> dialog.dismiss()
         );
 
 
         // LOGOUT
         ad.setNegativeButton(
                 "Logout",
-                new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(
-                            DialogInterface dialog,
-                            int which) {
+                (dialog, which) -> {
 
 
-                        editor.putBoolean(
-                                "isLoggedIn",
-                                false
-                        );
+                    editor.putBoolean(
+                            "isLoggedIn",
+                            false
+                    );
 
 
-                        editor.commit();
+                    editor.commit();
 
 
-                        Intent intent =
-                                new Intent(
-                                        HomeActivity.this,
-                                        LoginActivity.class
-                                );
+                    Intent intent =
+                            new Intent(
+                                    HomeActivity.this,
+                                    LoginActivity.class
+                            );
 
 
-                        intent.setFlags(
-                                Intent.FLAG_ACTIVITY_NEW_TASK |
-                                        Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        );
+                    intent.setFlags(
+                            Intent.FLAG_ACTIVITY_NEW_TASK |
+                                    Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    );
 
 
-                        startActivity(intent);
+                    startActivity(intent);
 
-                        finishAffinity();
-                    }
+                    finishAffinity();
                 }
         );
 
@@ -384,47 +374,5 @@ public class HomeActivity extends AppCompatActivity
     }
 
 
-    // ==========================================
-    // DOUBLE TAP TO EXIT
-    // ==========================================
 
-    @Override
-    public void onBackPressed() {
-
-
-        if (doubleTap) {
-
-            finishAffinity();
-
-        } else {
-
-
-            Toast.makeText(
-                    HomeActivity.this,
-                    "Double Tap To Exit",
-                    Toast.LENGTH_SHORT
-            ).show();
-
-
-            doubleTap = true;
-
-
-            Handler handler =
-                    new Handler();
-
-
-            handler.postDelayed(
-                    new Runnable() {
-
-                        @Override
-                        public void run() {
-
-                            doubleTap = false;
-                        }
-
-                    },
-                    3000
-            );
-        }
-    }
 }

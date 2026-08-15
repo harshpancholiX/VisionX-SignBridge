@@ -26,6 +26,8 @@ import androidx.cardview.widget.CardView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieDrawable;
 
+import java.util.Objects;
+
 public class LoginActivity extends AppCompatActivity {
     // Declare variables
     LottieAnimationView lavLoginlottie;
@@ -38,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences preferences;
     //temp database for put or edit
     SharedPreferences.Editor editor;
-    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Connect Java file with XML layout
         setContentView(R.layout.activity_login);
-        preferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+        preferences = getSharedPreferences("SignBridgePrefs", MODE_PRIVATE);
         editor = preferences.edit();
 
         // Check persistent login status
@@ -89,78 +90,66 @@ public class LoginActivity extends AppCompatActivity {
 
         // Perform action when CheckBox is checked or unchecked
         cbLoginShowHidePassword.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(@NonNull CompoundButton buttonView, boolean isChecked) {
-                        // If CheckBox is checked, show password
-                        if (isChecked) {
-                            etLoginPassword.setTransformationMethod(
-                                    HideReturnsTransformationMethod.getInstance());
-                        }
-                        // Otherwise hide password
-                        else {
-                            etLoginPassword.setTransformationMethod(
-                                    PasswordTransformationMethod.getInstance());
-                        }
+                (buttonView, isChecked) -> {
+                    // If CheckBox is checked, show password
+                    if (isChecked) {
+                        etLoginPassword.setTransformationMethod(
+                                HideReturnsTransformationMethod.getInstance());
+                    }
+                    // Otherwise hide password
+                    else {
+                        etLoginPassword.setTransformationMethod(
+                                PasswordTransformationMethod.getInstance());
                     }
                 });
 
         // Perform action when Login button is clicked
-        btnLoginLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String username = etLoginUsername.getText().toString();
-                String password = etLoginPassword.getText().toString();
+        btnLoginLogin.setOnClickListener(v -> {
+            String username = etLoginUsername.getText().toString();
+            String password = etLoginPassword.getText().toString();
 
-                if (username.isEmpty()) {
-                    etLoginUsername.setError("Please Enter Your Username");
-                } else if (password.isEmpty()) {
-                    etLoginPassword.setError("Please Enter Your Password");
+            if (username.isEmpty()) {
+                etLoginUsername.setError("Please Enter Your Username");
+            } else if (password.isEmpty()) {
+                etLoginPassword.setError("Please Enter Your Password");
+            } else {
+                // Check against registration data saved in SharedPreferences
+                String savedUsername = preferences.getString("username", "");
+                String savedPassword = preferences.getString("password", "");
+
+                if (Objects.equals(username, savedUsername) && Objects.equals(password, savedPassword)) {
+                    editor.putBoolean("isLoggedIn", true);
+                    editor.putString("username", username);
+                    editor.apply();
+
+                    Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                    
+                    // Navigate to HomeActivity which opens HomeFragment
+                    Intent i = new Intent(LoginActivity.this, HomeActivity.class);
+                    startActivity(i);
+                    finish();
+                } else if (savedUsername.isEmpty()) {
+                    Toast.makeText(LoginActivity.this, "No user found. Please register first.", Toast.LENGTH_LONG).show();
                 } else {
-                    // Check against registration data saved in SharedPreferences
-                    String savedUsername = preferences.getString("username", "");
-                    String savedPassword = preferences.getString("password", "");
-
-                    if (username.equals(savedUsername) && password.equals(savedPassword)) {
-                        editor.putBoolean("isLoggedIn", true);
-                        editor.putString("username", username);
-                        editor.apply();
-
-                        Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                        
-                        // Navigate to HomeActivity which opens HomeFragment
-                        Intent i = new Intent(LoginActivity.this, HomeActivity.class);
-                        startActivity(i);
-                        finish();
-                    } else if (savedUsername.isEmpty()) {
-                        Toast.makeText(LoginActivity.this, "No user found. Please register first.", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(LoginActivity.this, "Invalid Username or Password", Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(LoginActivity.this, "Invalid Username or Password", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        tvLoginNewUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(LoginActivity.this, RegistrationActivity.class);
-                startActivity(i);
-            }
+        tvLoginNewUser.setOnClickListener(v -> {
+            Intent i = new Intent(LoginActivity.this, RegistrationActivity.class);
+            startActivity(i);
         });
-        btnLoginForget.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(LoginActivity.this,ForgetPasswordActivity.class);
-                startActivity(i);
-                finish();
-            }
+        btnLoginForget.setOnClickListener(v -> {
+            Intent i = new Intent(LoginActivity.this,ForgetPasswordActivity.class);
+            startActivity(i);
+            finish();
         });
 
     }
 
     public static void logout(Context context) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences preferences = context.getSharedPreferences("SignBridgePrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.clear();
         editor.putBoolean("isLoggedIn", false);
