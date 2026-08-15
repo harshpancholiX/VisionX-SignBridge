@@ -3,4 +3,20 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#1532D5</color>
+
+    <!-- App Palette -->
+    <color name="primary">#1532D5</color>
+    <color name="primary_dark">#0D24A1</color>
+    <color name="secondary">#0047FF</color>
+    <color name="secondary_dark">#0036C2</color>
+    <color name="accent">#4D7CFF</color>
+
+    <!-- Backgrounds & Surfaces -->
+    <color name="background">#F5F7FF</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="error">#B00020</color>
+
+    <!-- Typography -->
+    <color name="text_primary">#1A1C1E</color>
+    <color name="text_secondary">#44474E</color>
 </resources>

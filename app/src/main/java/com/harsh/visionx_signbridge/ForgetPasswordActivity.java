@@ -54,7 +54,9 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                     etConfirmNewPassword.setError("Password and ConfirmPassword Does Not Match");
                 } else {
                     Toast.makeText(ForgetPasswordActivity.this, "Password Reset Successfully", Toast.LENGTH_SHORT).show();
-
+                    Intent intent = new Intent(ForgetPasswordActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
 
             }
