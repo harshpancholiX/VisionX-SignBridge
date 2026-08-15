@@ -16,7 +16,7 @@
         android:orientation="vertical"
         android:padding="18dp">
 
-
+        <!-- HEADER -->
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -41,7 +41,7 @@
                     android:letterSpacing="0.16"/>
 
                 <TextView
-                    android:id="@+id/txtUsername"
+                    android:id="@+id/ivtextanim"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
@@ -59,6 +59,7 @@
                 android:layout_centerVertical="true"
                 app:cardCornerRadius="24dp"
                 app:cardBackgroundColor="#20FFFFFF"
+                app:cardElevation="0dp"
                 app:strokeWidth="1dp"
                 app:strokeColor="#4055B8FF">
 
@@ -74,66 +75,12 @@
 
         </RelativeLayout>
 
-        <!-- Progress Section -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="18dp"
-            app:cardBackgroundColor="@android:color/transparent"
-            app:cardCornerRadius="18dp"
-            app:strokeColor="#3055B8FF"
-            app:strokeWidth="1dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp"
-                android:background="@drawable/glass_card">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:id="@+id/txtSignsLearned"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="0 signs learned"
-                        android:textColor="#AAB8DE"
-                        android:textSize="13sp"/>
-                    <TextView
-                        android:id="@+id/txtProgress"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0%"
-                        android:textColor="#55B8FF"
-                        android:textSize="14sp"
-                        android:textStyle="bold"/>
-                </LinearLayout>
-
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="8dp"
-                    android:layout_marginTop="10dp"
-                    android:progress="68"
-                    android:progressDrawable="@android:drawable/progress_horizontal"
-                    android:progressTint="#55B8FF"/>
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-
-
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="58dp"
             app:cardBackgroundColor="@android:color/transparent"
             app:cardCornerRadius="18dp"
+            app:cardElevation="0dp"
             app:strokeColor="#4055B8FF"
             app:strokeWidth="1dp">
 
@@ -172,6 +119,7 @@
         </com.google.android.material.card.MaterialCardView>
 
 
+        <!-- TRANSLATE -->
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardTranslate"
@@ -180,6 +128,7 @@
             android:layout_marginTop="18dp"
             app:cardBackgroundColor="@android:color/transparent"
             app:cardCornerRadius="24dp"
+            app:cardElevation="0dp"
             app:strokeColor="#506D8DFF"
             app:strokeWidth="1dp">
 
@@ -224,9 +173,8 @@
                     android:layout_marginTop="14dp"
                     android:text="Start Learning  →"
                     android:textColor="#FFFFFF"
-                    android:textSize="13sp"
-                    android:paddingStart="10sp"
                     android:background="@drawable/glass_card"
+                    android:textSize="13sp"
                     android:textStyle="bold"
                     app:backgroundTint="#2563EB"
                     app:cornerRadius="14dp"/>
@@ -236,13 +184,307 @@
         </com.google.android.material.card.MaterialCardView>
 
 
+        <!-- COMMUNICATION TOOLKIT -->
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/communicationToolkitCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="22dp"
+            app:cardElevation="0dp"
+            app:strokeColor="#4055B8FF"
+            app:strokeWidth="1dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:background="@drawable/glass_card">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Communication Toolkit"
+                            android:textColor="#FFFFFF"
+                            android:textSize="19sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Everything you need to communicate"
+                            android:textColor="#7F8DB5"
+                            android:textSize="11sp"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:gravity="center"
+                        android:text="🤟"
+                        android:textSize="24sp"
+                        android:background="@drawable/glass_card"/>
+
+                </LinearLayout>
+
+
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="14dp"
+                    android:background="#203F5FA0"/>
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:id="@+id/layoutFavorites"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="8dp"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="⭐"
+                            android:textSize="22sp"/>
+
+                        <TextView
+                            android:id="@+id/txtFavoriteCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="0"
+                            android:textColor="#FFFFFF"
+                            android:textSize="18sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Favorites"
+                            android:textColor="#7F8DB5"
+                            android:textSize="10sp"/>
+
+                    </LinearLayout>
+
+
+                    <!-- OFFLINE -->
+
+                    <LinearLayout
+                        android:id="@+id/layoutOffline"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="8dp"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="📥"
+                            android:textSize="22sp"/>
+
+                        <TextView
+                            android:id="@+id/txtOfflineCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="0"
+                            android:textColor="#FFFFFF"
+                            android:textSize="18sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Offline Signs"
+                            android:textColor="#7F8DB5"
+                            android:textSize="10sp"/>
+
+                    </LinearLayout>
+
+
+                    <!-- LANGUAGES -->
+
+                    <LinearLayout
+                        android:id="@+id/layoutLanguages"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="8dp"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🌐"
+                            android:textSize="22sp"/>
+
+                        <TextView
+                            android:id="@+id/txtLanguageCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="3"
+                            android:textColor="#FFFFFF"
+                            android:textSize="18sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Languages"
+                            android:textColor="#7F8DB5"
+                            android:textSize="10sp"/>
+
+                    </LinearLayout>
+
+
+                    <!-- PROGRESS -->
+
+                    <LinearLayout
+                        android:id="@+id/layoutProgress"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🎯"
+                            android:textSize="22sp"/>
+
+                        <TextView
+                            android:id="@+id/txtLearningProgress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="0%"
+                            android:textColor="#55B8FF"
+                            android:textSize="18sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Progress"
+                            android:textColor="#7F8DB5"
+                            android:textSize="10sp"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <!-- COMMUNICATION STATUS -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:paddingStart="13dp"
+                    android:paddingTop="11dp"
+                    android:paddingEnd="13dp"
+                    android:paddingBottom="11dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:background="@drawable/glass_card">
+
+                    <!-- Green Dot - no circle_green drawable required -->
+
+                    <TextView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:gravity="center"
+                        android:text="●"
+                        android:textColor="#39E58C"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:id="@+id/txtCommunicationStatus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:text="Ready for communication"
+                        android:textColor="#B8C4E5"
+                        android:textSize="11sp"
+                        android:maxLines="1"
+                        android:ellipsize="end"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="ACTIVE"
+                        android:textColor="#55B8FF"
+                        android:textSize="9sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.08"
+                        android:background="@drawable/glass_card"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <!-- QUICK ACTIONS -->
 
         <TextView
+            android:id="@+id/tvQuickAction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:text="Quick Actions"
-            android:id="@+id/tvQuickAction"
             android:textColor="#FFFFFF"
             android:textSize="21sp"
             android:textStyle="bold"/>
@@ -256,13 +498,13 @@
             android:textSize="12sp"/>
 
 
+        <!-- QUICK ACTION ROW 1 -->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:orientation="horizontal">
-
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardPractice"
@@ -311,7 +553,6 @@
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
-
 
 
             <com.google.android.material.card.MaterialCardView
@@ -365,13 +606,13 @@
         </LinearLayout>
 
 
+        <!-- QUICK ACTION ROW 2 -->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:orientation="horizontal">
-
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardLearn"
@@ -472,6 +713,9 @@
 
         </LinearLayout>
 
+
+        <!-- TEXT TO SPEECH -->
+
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardTextToSign"
             android:layout_width="match_parent"
@@ -479,6 +723,7 @@
             android:layout_marginTop="14dp"
             app:cardBackgroundColor="@android:color/transparent"
             app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
             app:strokeColor="#506C3FD4"
             app:strokeWidth="1dp">
 
@@ -536,8 +781,8 @@
         </com.google.android.material.card.MaterialCardView>
 
 
+        <!-- RECENT ACTIVITY -->
 
-        <!-- Recent Translations -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -574,6 +819,9 @@
 
         </LinearLayout>
 
+
+        <!-- POPULAR CATEGORIES -->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -592,14 +840,11 @@
             android:textSize="12sp"/>
 
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:orientation="horizontal">
-
-
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
@@ -608,6 +853,7 @@
                 android:layout_marginEnd="5dp"
                 app:cardBackgroundColor="@android:color/transparent"
                 app:cardCornerRadius="18dp"
+                app:cardElevation="0dp"
                 app:strokeColor="#3055B8FF"
                 app:strokeWidth="1dp">
 
@@ -646,6 +892,7 @@
                 android:layout_marginEnd="5dp"
                 app:cardBackgroundColor="@android:color/transparent"
                 app:cardCornerRadius="18dp"
+                app:cardElevation="0dp"
                 app:strokeColor="#3055B8FF"
                 app:strokeWidth="1dp">
 
@@ -683,6 +930,7 @@
                 android:layout_marginStart="5dp"
                 app:cardBackgroundColor="@android:color/transparent"
                 app:cardCornerRadius="18dp"
+                app:cardElevation="0dp"
                 app:strokeColor="#3055B8FF"
                 app:strokeWidth="1dp">
 
@@ -715,6 +963,8 @@
         </LinearLayout>
 
 
+        <!-- OFFLINE READY -->
+
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="105dp"
@@ -722,6 +972,7 @@
             android:layout_marginBottom="25dp"
             app:cardBackgroundColor="@android:color/transparent"
             app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
             app:strokeColor="#3055B8FF"
             app:strokeWidth="1dp">
 
@@ -778,7 +1029,6 @@
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
-
 
     </LinearLayout>
 

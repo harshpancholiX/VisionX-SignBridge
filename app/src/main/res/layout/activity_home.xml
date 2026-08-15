@@ -17,32 +17,16 @@
         android:id="@+id/homeFrameLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="100"
-        />
+        android:layout_weight="95" />
 
-    <!-- Bottom Navigation Container -->
-    <FrameLayout
+    <!-- Bottom Navigation -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/homeBottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="16dp"
-        android:background="@android:color/transparent">
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/homeBottomNavigationView"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@drawable/glass_card"
-            app:elevation="0dp"
-            app:itemIconSize="24dp"
-            app:itemIconTint="@color/nav_item_color"
-            app:itemTextColor="@color/nav_item_color"
-            app:itemPaddingTop="12dp"
-            app:labelVisibilityMode="labeled"
-            app:menu="@menu/home_bottom_navigation"
-            android:layout_marginTop="11dp"/>
-
-    </FrameLayout>
+        app:menu="@menu/home_bottom_navigation"
+        app:itemIconTint="@color/black"
+        android:layout_weight="5"
+        />
 
 </LinearLayout>

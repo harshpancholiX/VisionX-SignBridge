@@ -19,9 +19,6 @@
         android:paddingTop="22dp"
         android:paddingBottom="32dp">
 
-        <!-- ================================================= -->
-        <!-- HEADER -->
-        <!-- ================================================= -->
 
         <LinearLayout
             android:id="@+id/headerContainer"
@@ -54,8 +51,6 @@
 
             </LinearLayout>
 
-            <!-- Language Icon -->
-
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/languageIconCard"
                 android:layout_width="48dp"
@@ -78,10 +73,6 @@
 
         </LinearLayout>
 
-
-        <!-- ================================================= -->
-        <!-- HERO CARD -->
-        <!-- ================================================= -->
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/heroLanguageCard"

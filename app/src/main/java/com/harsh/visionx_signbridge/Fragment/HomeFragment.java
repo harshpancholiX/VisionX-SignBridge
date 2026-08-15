@@ -76,14 +76,8 @@ public class HomeFragment extends Fragment {
         txtGreeting =
                 view.findViewById(R.id.txtGreeting);
 
-        txtUsername =
-                view.findViewById(R.id.txtUsername);
 
-        txtProgress =
-                view.findViewById(R.id.txtProgress);
 
-        txtSignsLearned =
-                view.findViewById(R.id.txtSignsLearned);
 
         txtRecentOne =
                 view.findViewById(R.id.txtRecentOne);
@@ -113,8 +107,7 @@ public class HomeFragment extends Fragment {
                 view.findViewById(R.id.cardPractice);
 
 
-        progressBar =
-                view.findViewById(R.id.progressBar);
+      
     }
 
     private void loadHomeData() {

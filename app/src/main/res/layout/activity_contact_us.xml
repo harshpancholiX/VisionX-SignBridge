@@ -1,10 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ContactUsActivity">
+    android:fillViewport="true"
+    android:scrollbars="none">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#050B24"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sends SMS and EMAIL"
+            android:textColor="#E2DED4"
+            android:id="@+id/ivtextanim"
+            android:layout_marginTop="70sp"
+            android:textSize="24sp"
+
+            android:textAlignment="center"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:id="@+id/etcontactusmobile"
+            android:textColorHint="@color/white"
+            android:textSize="16sp"
+            android:hint="Enter Your Mobile No "
+
+            android:background="@drawable/glass_card"
+            android:paddingLeft="16sp"
+            android:drawablePadding="10sp"
+            android:drawableLeft="@drawable/telephone_"
+            android:inputType="number"
+            android:maxLength="10"
+            android:layout_marginTop="46sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:id="@+id/etcontactmessage"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:background="@drawable/glass_card"
+            android:hint="Enter Your Message"
+            android:textSize="16sp"
+
+            android:layout_marginTop="16dp"
+            android:inputType="textCapSentences|textMultiLine"
+            android:gravity="top|start"
+            android:padding="16dp"
+            android:maxLines="6" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btncantactussendsms"
+            android:text="SEND SMS"
+            android:textSize="16sp"
+            android:textColor="#D4AF37"
+
+            android:background="@drawable/glass_card"
+            android:textStyle="italic"
+            android:padding="16sp"
+            android:layout_margin="16sp"
+            android:layout_gravity="center"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/glass_card"
+            android:layout_marginTop="16sp"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:id="@+id/etcontactusreciepent"
+            android:textColorHint="@color/white"
+            android:textSize="16sp"
+            android:hint="Enter Receipient / To"
+            android:background="@drawable/glass_card"
+            android:paddingLeft="16sp"
+            android:inputType="text"
+            android:drawablePadding="10sp"
+            android:drawableLeft="@drawable/Email_icon"
+            android:layout_marginTop="36sp"/>
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:id="@+id/etcontactusemail"
+            android:textColorHint="@color/white"
+            android:textSize="16sp"
+            android:hint="Enter Subject "
+            android:background="@drawable/glass_card"
+            android:paddingLeft="16sp"
+
+            android:inputType="text"
+            android:layout_marginTop="16sp"
+
+            android:drawablePadding="10sp"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:textColor="@color/white"
+            android:background="@drawable/glass_card"
+            android:hint="Enter  Your Message"
+            android:textSize="16sp"
+            android:layout_marginTop="16sp"
+            android:inputType="text"
+            android:paddingLeft="16sp"
+            android:textColorHint="@color/white"
+            android:id="@+id/etcontactemailenter"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btncantactussendemail"
+            android:text="SEND EMAIL"
+            android:textSize="16sp"
+            android:textColor="#D4AF37"
+            android:background="@drawable/glass_card"
+            android:textStyle="italic"
+            android:padding="16sp"
+            android:layout_margin="16sp"
+            android:layout_gravity="center"
+            />
+
+
+    </LinearLayout>
+</ScrollView>
