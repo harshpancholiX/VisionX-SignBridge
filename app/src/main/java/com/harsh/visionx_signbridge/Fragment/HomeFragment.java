@@ -255,6 +255,126 @@ public class HomeFragment extends Fragment {
         startActivity(intent);
     }
 
+    public void saveUsername(String username) {
+
+        preferences.edit()
+                .putString(
+                        "username",
+                        username
+                )
+                .apply();
+
+        loadHomeData();
+    }
+
+    public void saveProgress(int progress) {
+
+        int validatedProgress = progress;
+        if (validatedProgress < 0) {
+            validatedProgress = 0;
+        }
+
+        if (validatedProgress > 100) {
+            validatedProgress = 100;
+        }
+
+        preferences.edit()
+                .putInt(
+                        "progress",
+                        validatedProgress
+                )
+                .apply();
+
+        loadHomeData();
+    }
+
+    public void saveSignsLearned(int count) {
+
+        preferences.edit()
+                .putInt(
+                        "signsLearned",
+                        count
+                )
+                .apply();
+
+        loadHomeData();
+    }
+
+    public void addLearnedSign() {
+
+        int currentSignsLearned =
+                preferences.getInt(
+                        "signsLearned",
+                        12
+                );
+
+        currentSignsLearned++;
+
+        int progress =
+                preferences.getInt(
+                        "progress",
+                        68
+                );
+
+        int newProgress = progress + 2;
+
+        if (newProgress > 100) {
+            newProgress = 100;
+        }
+
+        preferences.edit()
+                .putInt(
+                        "signsLearned",
+                        currentSignsLearned
+                )
+                .putInt(
+                        "progress",
+                        newProgress
+                )
+                .apply();
+
+        loadHomeData();
+    }
+
+    public void saveTranslation(
+            String translatedText) {
+
+        String recentOne =
+                preferences.getString(
+                        "recentOne",
+                        "Hello"
+                );
+
+        preferences.edit()
+                .putString(
+                        "recentTwo",
+                        recentOne
+                )
+                .putString(
+                        "recentOne",
+                        translatedText
+                )
+                .apply();
+
+        loadHomeData();
+    }
+
+    public String getUsername() {
+
+        return preferences.getString(
+                "username",
+                "User"
+        );
+    }
+
+    public void clearLocalData() {
+
+        preferences.edit()
+                .clear()
+                .apply();
+
+        loadHomeData();
+    }
 
     @Override
     public void onResume() {
