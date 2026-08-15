@@ -23,7 +23,7 @@
         <item name="colorError">@color/error</item>
 
         <!-- Typography -->
-        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:fontFamily">sans-serif</item>
         <item name="android:textColorPrimary">@color/text_primary</item>
         <item name="android:textColorSecondary">@color/text_secondary</item>
 
@@ -49,37 +49,37 @@
         <item name="android:minHeight">@dimen/input_height</item>
     </style>
 
-    <!-- Card Style -->
+
     <style name="Widget.MaterialCardView.SignBridge" parent="Widget.MaterialComponents.CardView">
         <item name="cardCornerRadius">@dimen/radius_medium</item>
         <item name="cardElevation">@dimen/elevation_level_1</item>
     </style>
 
-    <!-- Text Styles -->
-    <style name="TextAppearance.Display">
+
+    <style name="TextAppearance.Display" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_display</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/text_primary</item>
     </style>
 
-    <style name="TextAppearance.Heading">
+    <style name="TextAppearance.Heading" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_heading</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/text_primary</item>
     </style>
 
-    <style name="TextAppearance.Subtitle">
+    <style name="TextAppearance.Subtitle" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_subtitle</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/text_primary</item>
     </style>
 
-    <style name="TextAppearance.Body">
+    <style name="TextAppearance.Body" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_body</item>
         <item name="android:textColor">@color/text_primary</item>
     </style>
 
-    <style name="TextAppearance.Caption">
+    <style name="TextAppearance.Caption" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_caption</item>
         <item name="android:textColor">@color/text_secondary</item>
     </style>

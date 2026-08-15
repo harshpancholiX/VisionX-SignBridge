@@ -80,7 +80,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                                     PasswordTransformationMethod.getInstance());
                         }
 
-                        // Move cursor to the end
+
                         etNewPassword.setSelection(
                                 etNewPassword.getText().length());
 

@@ -3,7 +3,9 @@ package com.harsh.visionx_signbridge;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
@@ -13,6 +15,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private TextInputEditText etEmail;
     private TextInputEditText etPassword;
+    private long backPressedTime;
+    private Toast backToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,21 @@ public class LoginActivity extends AppCompatActivity {
 
         MaterialButton btnLogin = findViewById(R.id.btnLogin);
         MaterialButton btnCreateAccount = findViewById(R.id.btnCreateAccount);
+
+        // Double tap to exit logic
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (backPressedTime + 2000 > System.currentTimeMillis()) {
+                    if (backToast != null) backToast.cancel();
+                    finishAffinity();
+                } else {
+                    backToast = Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT);
+                    backToast.show();
+                }
+                backPressedTime = System.currentTimeMillis();
+            }
+        });
 
         // =========================
         // LOGIN
@@ -69,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
 
             Intent intent = new Intent(
                     LoginActivity.this,
-                    RegisterActivity.class
+                    RegistrationActivity.class
             );
 
             startActivity(intent);
