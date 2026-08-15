@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Forgot_Password_Activity"
+            android:name=".ForgetPasswordActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
     </application>

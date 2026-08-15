@@ -25,7 +25,7 @@ public class SplashActivity extends AppCompatActivity {
         });
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            Intent intent = new Intent(SplashActivity.this, Forgot_Password_Activity.class);
+            Intent intent = new Intent(SplashActivity.this, ForgetPasswordActivity.class);
             startActivity(intent);
             finish();
         }, 3000); // 3 seconds delay
