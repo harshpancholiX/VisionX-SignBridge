@@ -2,4 +2,25 @@
     <string name="app_name">VisionX-SignBridge</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <plurals name="language_count">
+        <item quantity="one">1 language</item>
+        <item quantity="other">%d languages</item>
+    </plurals>
+
+    <string name="languages_title">Languages</string>
+    <string name="languages_subtitle">Choose your preferred sign language</string>
+    <string name="find_your_language">Find your language</string>
+    <string name="hero_card_description">Explore available sign-language content and make learning more personal.</string>
+    <string name="search_hint">Search languages...</string>
+    <string name="available_languages">Available Languages</string>
+    <string name="no_languages_found">No languages found</string>
+    <string name="try_searching_again">Try searching with another language name.</string>
+    <string name="language_info">Your selected language will be used throughout sign-language content.</string>
+    <string name="content_desc_language">Languages</string>
+    <string name="content_desc_sign_bridge">SignBridge</string>
+    <string name="content_desc_search">Search</string>
+    <string name="content_desc_no_languages">No languages found</string>
+    <string name="content_desc_info">Information</string>
+    <string name="content_desc_language_icon">Language Icon</string>
 </resources>

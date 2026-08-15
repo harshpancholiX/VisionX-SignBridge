@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,7 +15,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import com.google.android.material.card.MaterialCardView;
 
 import com.harsh.visionx_signbridge.R;
 import com.harsh.visionx_signbridge.TranslateActivity;
@@ -35,11 +33,11 @@ public class HomeFragment extends Fragment {
 
     ImageView imgProfile;
 
-    MaterialCardView cardTranslate;
-    MaterialCardView cardSignToText;
-    MaterialCardView cardTextToSign;
-    MaterialCardView cardLearn;
-    MaterialCardView cardPractice;
+    View cardTranslate;
+    View cardSignToText;
+    View cardTextToSign;
+    View cardLearn;
+    View cardPractice;
 
     ProgressBar progressBar;
 
@@ -151,74 +149,82 @@ public class HomeFragment extends Fragment {
                         "Thank You"
                 );
 
-        txtUsername.setText(username);
+        if (txtUsername != null) txtUsername.setText(username);
 
-        progressBar.setProgress(progress);
+        if (progressBar != null) progressBar.setProgress(progress);
 
-        txtProgress.setText(
-                progress + "%"
-        );
+        if (txtProgress != null) {
+            txtProgress.setText(
+                    progress + "%"
+            );
+        }
 
-        txtSignsLearned.setText(
-                signsLearned + " signs learned"
-        );
+        if (txtSignsLearned != null) {
+            txtSignsLearned.setText(
+                    signsLearned + " signs learned"
+            );
+        }
 
-        txtRecentOne.setText(
-                "🤟   " + recentOne
-        );
+        if (txtRecentOne != null) {
+            txtRecentOne.setText(
+                    "🤟   " + recentOne
+            );
+        }
 
-        txtRecentTwo.setText(
-                "🤟   " + recentTwo
-        );
+        if (txtRecentTwo != null) {
+            txtRecentTwo.setText(
+                    "🤟   " + recentTwo
+            );
+        }
     }
 
     private void setupClickListeners() {
 
-        btnStartTranslate.setOnClickListener(v -> {
+        if (btnStartTranslate != null) {
+            btnStartTranslate.setOnClickListener(v -> {
+                openTranslate("sign_to_text");
+            });
+        }
 
-            openTranslate(
-                    "sign_to_text"
-            );
-        });
+        if (cardTranslate != null) {
+            cardTranslate.setOnClickListener(v -> {
+                openTranslate("sign_to_text");
+            });
+        }
 
-        cardTranslate.setOnClickListener(v -> {
+        if (cardSignToText != null) {
+            cardSignToText.setOnClickListener(v -> {
+                openTranslate("sign_to_text");
+            });
+        }
 
-            openTranslate(
-                    "sign_to_text"
-            );
-        });
+        if (cardTextToSign != null) {
+            cardTextToSign.setOnClickListener(v -> {
+                openTranslate("text_to_sign");
+            });
+        }
 
-        cardSignToText.setOnClickListener(v -> {
+        if (cardLearn != null) {
+            cardLearn.setOnClickListener(v -> {
+                Toast.makeText(requireContext(), "Learning mode coming soon", Toast.LENGTH_SHORT).show();
+            });
+        }
 
-            openTranslate(
-                    "sign_to_text"
-            );
-        });
+        if (cardPractice != null) {
+            cardPractice.setOnClickListener(v -> {
+                Toast.makeText(
+                        requireContext(),
+                        "Practice mode coming soon",
+                        Toast.LENGTH_SHORT
+                ).show();
+            });
+        }
 
-        cardTextToSign.setOnClickListener(v -> {
-
-            openTranslate(
-                    "text_to_sign"
-            );
-        });
-
-        cardLearn.setOnClickListener(v -> {
-
-        });
-
-        cardPractice.setOnClickListener(v -> {
-
-            Toast.makeText(
-                    requireContext(),
-                    "Practice mode coming soon",
-                    Toast.LENGTH_SHORT
-            ).show();
-        });
-
-        imgProfile.setOnClickListener(v -> {
-
-            openProfile();
-        });
+        if (imgProfile != null) {
+            imgProfile.setOnClickListener(v -> {
+                openProfile();
+            });
+        }
     }
 
     private void openTranslate(String mode) {

@@ -181,7 +181,7 @@
 
                 <!-- Google Button -->
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnGoogle"
+                    android:id="@+id/btnGoogleLogin"
                     style="@style/Widget.Material3.Button.OutlinedButton"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
