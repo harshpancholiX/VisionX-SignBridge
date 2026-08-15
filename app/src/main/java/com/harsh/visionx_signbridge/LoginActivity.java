@@ -1,4 +1,4 @@
-package com.example.signbridge.activities;
+package com.harsh.visionx_signbridge;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,6 @@ import android.util.Patterns;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.signbridge.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -14,9 +13,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private TextInputEditText etEmail;
     private TextInputEditText etPassword;
-
-    private MaterialButton btnLogin;
-    private MaterialButton btnCreateAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +24,8 @@ public class LoginActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
 
-        btnLogin = findViewById(R.id.btnLogin);
-        btnCreateAccount = findViewById(R.id.btnCreateAccount);
+        MaterialButton btnLogin = findViewById(R.id.btnLogin);
+        MaterialButton btnCreateAccount = findViewById(R.id.btnCreateAccount);
 
         // =========================
         // LOGIN
@@ -58,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 
             Intent intent = new Intent(
                     LoginActivity.this,
-                    ForgotPasswordActivity.class
+                    Forgot_Password_Activity.class
             );
 
             startActivity(intent);
