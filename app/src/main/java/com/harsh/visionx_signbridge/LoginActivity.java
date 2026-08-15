@@ -109,46 +109,34 @@ public class LoginActivity extends AppCompatActivity {
         btnLoginLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Check whether username field is empty
-                if (etLoginUsername.getText().toString().isEmpty()) {
+                String username = etLoginUsername.getText().toString();
+                String password = etLoginPassword.getText().toString();
+
+                if (username.isEmpty()) {
                     etLoginUsername.setError("Please Enter Your Username");
-                }
-
-                // Check username length
-                else if (etLoginUsername.getText().toString().length() < 8) {
-                    etLoginUsername.setError("UserName Must be More Than 8");
-                }
-
-                // Validate username using Regular Expression
-                else if (!etLoginUsername.getText().toString()
-                        .matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Za-z0-9]).{8,}$")) {
-                    etLoginUsername.setError(
-                            "Username must contain one uppercase, one lowercase, one number and one special symbol");
-                }
-
-                // Check whether password field is empty
-                else if (etLoginPassword.getText().toString().isEmpty()) {
+                } else if (password.isEmpty()) {
                     etLoginPassword.setError("Please Enter Your Password");
-                }
+                } else {
+                    // Check against registration data saved in SharedPreferences
+                    String savedUsername = preferences.getString("username", "");
+                    String savedPassword = preferences.getString("password", "");
 
-                // Check password length
-                else if (etLoginPassword.getText().toString().length() < 8) {
-                    etLoginPassword.setError("Password Must be More Than 8");
-                }
+                    if (username.equals(savedUsername) && password.equals(savedPassword)) {
+                        editor.putBoolean("isLoggedIn", true);
+                        editor.putString("username", username);
+                        editor.apply();
 
-                // Validate password using Regular Expression
-                else if (!etLoginPassword.getText().toString()
-                        .matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Za-z0-9]).{8,}$")) {
-                    etLoginPassword.setError(
-                            "Password must contain one uppercase, one lowercase, one number and one special symbol");
-                }
-
-                // If all conditions are satisfied
-                else {
-                    Toast.makeText(LoginActivity.this, "Login Successfull", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(LoginActivity.this,HomeActivity.class);
-                    startActivity(i);
-                    finish();
+                        Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                        
+                        // Navigate to HomeActivity which opens HomeFragment
+                        Intent i = new Intent(LoginActivity.this, HomeActivity.class);
+                        startActivity(i);
+                        finish();
+                    } else if (savedUsername.isEmpty()) {
+                        Toast.makeText(LoginActivity.this, "No user found. Please register first.", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Invalid Username or Password", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
