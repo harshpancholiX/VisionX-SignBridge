@@ -30,6 +30,10 @@
         <activity
             android:name=".RegistrationActivity"
             android:exported="false" />
+        <activity
+            android:name=".OnBoardingActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>
