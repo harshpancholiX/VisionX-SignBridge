@@ -190,7 +190,7 @@ public class BridgeFragment extends Fragment {
                             int count) {
 
                         tvCharacterCount.setText(
-                                s.length() + "/120"
+                                String.format(Locale.getDefault(), "%d/120", s.length())
                         );
                     }
 
@@ -224,10 +224,8 @@ public class BridgeFragment extends Fragment {
 
         btnGenerate.setOnClickListener(v -> {
 
-            String message =
-                    etMessage.getText()
-                            .toString()
-                            .trim();
+            Editable text = etMessage.getText();
+            String message = (text != null) ? text.toString().trim() : "";
 
             if (message.isEmpty()) {
 
@@ -439,15 +437,26 @@ public class BridgeFragment extends Fragment {
 
         Glide.with(this)
                 .load(mediaUrl)
-                .listener(new RequestListener<Drawable>() {
+                .listener(new RequestListener<>() {
                     @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                    public boolean onLoadFailed(
+                            @Nullable GlideException e,
+                            @Nullable Object model,
+                            @NonNull Target<Drawable> target,
+                            boolean isFirstResource) {
+
                         progressMedia.setVisibility(View.GONE);
                         return false;
                     }
 
                     @Override
-                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                    public boolean onResourceReady(
+                            @NonNull Drawable resource,
+                            @NonNull Object model,
+                            @NonNull Target<Drawable> target,
+                            @NonNull DataSource dataSource,
+                            boolean isFirstResource) {
+
                         progressMedia.setVisibility(View.GONE);
                         return false;
                     }
