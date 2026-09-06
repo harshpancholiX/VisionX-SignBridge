@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -67,8 +68,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 etRegistrationEmailId.setError("Enter Email Id");
             }
 
-            else if (!etRegistrationEmailId.getText().toString().contains("@")
-                    || !etRegistrationEmailId.getText().toString().contains(".com")) {
+            else if (!Patterns.EMAIL_ADDRESS.matcher(etRegistrationEmailId.getText().toString()).matches()) {
                 etRegistrationEmailId.setError("Enter Valid Email Id");
             }
 
@@ -77,7 +77,7 @@ public class RegistrationActivity extends AppCompatActivity {
             }
 
             else if (etRegistrationUsername.getText().toString().length() < 8) {
-                etRegistrationUsername.setError("UserName Length Must be more than 8");
+                etRegistrationUsername.setError("UserName Length Must be at least 8 characters");
             }
 
             else if (!etRegistrationUsername.getText().toString().matches(".*[A-Z].*")) {
@@ -101,7 +101,7 @@ public class RegistrationActivity extends AppCompatActivity {
             }
 
             else if (etRegistrationPassword.getText().toString().length() < 8) {
-                etRegistrationPassword.setError("Password Length Must be more than 8");
+                etRegistrationPassword.setError("Password Length Must be at least 8 characters");
             }
 
             else if (!etRegistrationPassword.getText().toString().matches(".*[A-Z].*")) {

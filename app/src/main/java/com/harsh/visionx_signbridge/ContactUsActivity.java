@@ -59,37 +59,37 @@ public class ContactUsActivity extends AppCompatActivity {
                     String strMobileNo = etcontactusmobile.getText().toString();
                     String strmessage = etcontactmessage.getText().toString();
 
-                    SmsManager smsManajer = SmsManager.getDefault();
-                    smsManajer.sendTextMessage(strMobileNo,null,
+                    SmsManager smsManager = SmsManager.getDefault();
+                    smsManager.sendTextMessage(strMobileNo,null,
                             strmessage,null,null);
 
                     Toast.makeText(ContactUsActivity.this,
-                            "SMS Send Successfully",Toast.LENGTH_SHORT).show();
+                            "SMS Sent Successfully",Toast.LENGTH_SHORT).show();
 
                     etcontactusmobile.setText("");
                     etcontactmessage.setText("");
 
                 } catch (Exception e) {
-                    Toast.makeText(ContactUsActivity.this,"not",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ContactUsActivity.this, "Failed to send SMS", Toast.LENGTH_SHORT).show();
                 }}
         });
         btncantactussendemail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String strreciepint = etcontactusreciepent.getText().toString();
+                String strrecipient = etcontactusreciepent.getText().toString();
                 String stremail = etcontactusemail.getText().toString();
                 String stremailenter = etcontactemailenter.getText().toString();
                 Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("Message/rfc822");
-                intent.putExtra(Intent.EXTRA_EMAIL,new String[]{strreciepint});
-                intent.putExtra(Intent.EXTRA_SUBJECT,stremail);
-                intent.putExtra(Intent.EXTRA_TEXT,stremailenter);
+                intent.setType("message/rfc822");
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{strrecipient});
+                intent.putExtra(Intent.EXTRA_SUBJECT, stremail);
+                intent.putExtra(Intent.EXTRA_TEXT, stremailenter);
 
 
                 try {
-                    startActivity(Intent.createChooser(intent,"Choose an App"));
+                    startActivity(Intent.createChooser(intent, "Choose an Email App"));
                 } catch (Exception e) {
-                    Toast.makeText(ContactUsActivity.this,""+e.toString(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ContactUsActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
 
             }
